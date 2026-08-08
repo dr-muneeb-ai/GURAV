@@ -1,0 +1,285 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+*{
+    font-family: Outfit;
+}
+
+
+/* ================= GLOBAL ================= */
+
+body{
+    background:#050505;
+    color:white;
+}
+
+
+/* ================= INPUTS ================= */
+
+select,
+input,
+textarea{
+
+    background:#0f172a;
+
+    color:white;
+
+    border:1px solid rgba(255,255,255,.15);
+
+    outline-color:#ff003c;
+
+    border-radius:8px;
+
+    transition:.3s;
+
+}
+
+
+select:focus,
+input:focus,
+textarea:focus{
+
+    border-color:#ff003c;
+
+    box-shadow:
+    0 0 15px rgba(255,0,60,.5);
+
+}
+
+
+
+/* ================= SIDEBAR ACTIVE ================= */
+
+
+.active{
+
+    background:
+    linear-gradient(
+    90deg,
+    #ff003c,
+    #7200ff
+    );
+
+
+    color:white;
+
+    border-color:#ff003c;
+
+
+    box-shadow:
+
+    0 0 20px rgba(255,0,60,.6);
+
+}
+
+
+
+/* ================= CARD GAMING ================= */
+
+
+.card-shine{
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:
+
+    linear-gradient(
+    145deg,
+    rgba(255,255,255,.08),
+    rgba(255,255,255,.02)
+    );
+
+
+    backdrop-filter:blur(20px);
+
+
+    border:
+
+    1px solid rgba(255,255,255,.12);
+
+
+    box-shadow:
+
+    0 0 25px rgba(255,0,60,.15);
+
+
+    transition:.5s;
+
+}
+
+
+
+.card-shine:hover{
+
+
+    transform:
+
+    translateY(-8px)
+    scale(1.02);
+
+
+    box-shadow:
+
+    0 0 30px rgba(255,0,60,.6),
+
+    0 0 80px rgba(114,0,255,.25);
+
+
+}
+
+
+
+/* ================= SHINE ANIMATION ================= */
+
+
+@keyframes cardShine {
+  0% {
+    transform: translateX(-150%) rotate(20deg);
+  }
+
+  100% {
+    transform: translateX(450%) rotate(20deg);
+  }
+}
+
+
+.card-shine {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #0b0b0b;
+}
+
+.card-shine::before {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 180%;
+  background: linear-gradient(
+    transparent,
+    transparent,
+    #ff003c,
+    #ff003c,
+    transparent
+  );
+  animation: borderMove 4s linear infinite;
+}
+
+.card-shine::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background: #0b0b0b;
+  border-radius: 22px;
+  z-index: 1;
+}
+
+.card-shine > * {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes borderMove {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* ================= NEON GLOW ================= */
+
+
+.red-glow{
+
+box-shadow:
+
+0 0 20px #ff003c,
+
+0 0 60px rgba(255,0,60,.5);
+
+}
+
+
+
+.blue-glow{
+
+box-shadow:
+
+0 0 20px #00eaff,
+
+0 0 60px rgba(0,234,255,.5);
+
+}
+
+
+
+.purple-glow{
+
+box-shadow:
+
+0 0 20px #7200ff,
+
+0 0 60px rgba(114,0,255,.5);
+
+}
+
+
+
+
+/* ================= TEXT GLOW ================= */
+
+
+.text-glow{
+
+
+text-shadow:
+
+
+0 0 10px #ff003c,
+
+0 0 30px #ff003c;
+
+
+}
+
+
+
+
+/* ================= SCROLLBAR ================= */
+
+
+::-webkit-scrollbar{
+
+width:8px;
+
+}
+
+
+::-webkit-scrollbar-track{
+
+background:#050505;
+
+}
+
+
+::-webkit-scrollbar-thumb{
+
+
+background:
+
+linear-gradient(
+
+#ff003c,
+
+#7200ff
+
+);
+
+
+border-radius:20px;
+
+}

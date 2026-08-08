@@ -1,0 +1,255 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prata&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================
+   Global Styles
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: "Outfit", sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#F5EFE6;
+    color:#1F1F1F;
+}
+
+.prata-regular{
+    font-family:"Prata", serif;
+    font-weight:400;
+    font-style:normal;
+}
+
+a.active hr{
+    display:block;
+}
+
+::-webkit-scrollbar{
+    display:none;
+}
+
+
+/* =========================
+   Mobile
+========================= */
+
+@media(max-width:640px){
+
+    a.active{
+        background:black;
+        color:white;
+    }
+
+    a.active hr{
+        display:none;
+    }
+
+}
+/* ==============================
+   Hero Heading Shine Animation
+============================== */
+
+.shine-text {
+  display: inline-block;
+
+  background: linear-gradient(
+    120deg,
+    #b9572c 15%,
+    #ffffff 40%,
+    #b9572c 65%
+  );
+
+  background-size: 250% auto;
+
+  color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  animation: textShine 4s linear infinite;
+}
+
+@keyframes textShine {
+  from {
+    background-position: 250% center;
+  }
+
+  to {
+    background-position: -250% center;
+  }
+}
+/* ==============================
+   Hero Image Shine Animation
+============================== */
+
+.hero-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-image::before {
+  content: "";
+  position: absolute;
+  top: -20%;
+  left: -80%;
+  width: 35%;
+  height: 140%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255,255,255,0.1) 30%,
+    rgba(255,255,255,0.8) 50%,
+    rgba(255,255,255,0.1) 70%,
+    transparent 100%
+  );
+  transform: rotate(20deg);
+  animation: heroShine 8s infinite;
+  z-index: 2;
+  pointer-events: none;
+}
+
+@keyframes heroShine {
+  0% {
+    left: -80%;
+  }
+
+  20% {
+    left: 140%;
+  }
+
+  100% {
+    left: 140%;
+  }
+}
+
+.logo-wrapper{
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.logo-wrapper{
+    position:relative;
+    display:inline-block;
+    overflow:hidden;
+}
+
+.logo-svg{
+    width:180px;
+    display:block;
+}
+
+.logo-shine{
+    position:absolute;
+    top:0;
+    left:-140%;
+    width:35%;
+    height:100%;
+
+    background:linear-gradient(
+        110deg,
+        transparent,
+        rgba(255,255,255,.95),
+        transparent
+    );
+
+    transform:skewX(-25deg);
+
+    pointer-events:none;
+
+    mix-blend-mode:screen;
+
+    animation:logoShine 5s infinite;
+}
+
+@keyframes logoShine{
+
+    0%{
+        left:-140%;
+    }
+
+    25%{
+        left:150%;
+    }
+
+    100%{
+        left:150%;
+    }
+
+}
+/* ================= Payment Icons ================= */
+
+.payment-icon{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:all .35s ease;
+}
+
+.payment-icon:hover{
+  transform:translateY(-6px) scale(1.08);
+  color:#fff;
+  filter:drop-shadow(0 0 12px rgba(185,87,44,.8));
+}
+
+.afterpay{
+  font-size:18px;
+  border:1px solid #555;
+  border-radius:10px;
+  padding:10px 18px;
+}
+
+.afterpay:hover{
+  border-color:#b9572c;
+}
+.product-glow{
+  background: linear-gradient(
+    135deg,
+    rgba(245,242,237,.95),
+    rgba(235,229,220,.9)
+  );
+
+  border: 1px solid rgba(185,87,44,.25);
+
+  border-radius: 30px;
+
+  animation: productGlow 3s ease-in-out infinite;
+
+  box-shadow:
+    0 0 20px rgba(185,87,44,.12);
+}
+
+@keyframes productGlow{
+
+  0%{
+    box-shadow:
+      0 0 20px rgba(185,87,44,.12),
+      0 0 40px rgba(185,87,44,.08);
+  }
+
+  50%{
+    box-shadow:
+      0 0 40px rgba(185,87,44,.28),
+      0 0 70px rgba(185,87,44,.18),
+      0 0 100px rgba(185,87,44,.10);
+  }
+
+  100%{
+    box-shadow:
+      0 0 20px rgba(185,87,44,.12),
+      0 0 40px rgba(185,87,44,.08);
+  }
+
+}
+

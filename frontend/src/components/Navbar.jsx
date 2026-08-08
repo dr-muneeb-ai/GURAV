@@ -1,0 +1,163 @@
+import React, { useContext, useState } from "react";
+import { assets } from "../assets/assets";
+import { Link, NavLink } from "react-router-dom";
+import { ShopContext } from "../context/ShopContext";
+
+function Navbar() {
+  const [visible, setVisible] = useState(false);
+
+  const {
+    setShowSearch,
+    getCartItems,
+    navigate,
+    token,
+    setToken,
+    setCartItems,
+    user,
+  } = useContext(ShopContext);
+
+  const logout = () => {
+    navigate("/login");
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setToken("");
+    setCartItems({});
+  };
+
+  return (
+    <nav className="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-md shadow-md border-b border-gray-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+
+          {/* Logo */}
+          <Link to="/" className="flex items-center">
+            <img
+              src={assets.logo}
+              className="w-28 sm:w-34 object-contain"
+              alt="Logo"
+            />
+          </Link>
+
+          {/* Desktop Navigation */}
+         <ul className="hidden sm:flex items-center gap-3 text-base">
+            {["Home", "Collection", "About", "Contact","Orders"].map((item, index) => (
+              <NavLink
+                to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+      		key={index}
+      		style={{ fontFamily: "Prata, serif" }}
+      		className={({ isActive }) =>
+      		   `px-4 py-1.5 rounded-full transition-all duration-300 ${
+          		isActive
+          		? "bg-black text-white shadow-md"
+            		: "text-gray-600 hover:bg-gray-100 hover:text-black"
+		}`
+	      }
+	    >
+	      {item}
+	    </NavLink>
+	  ))}
+
+	</ul>
+
+          {/* Right Icons */}
+          <div className="flex items-center gap-5">
+
+            {/* Search */}
+            <Link to="/collection">
+              <img
+                onClick={() => setShowSearch(true)}
+                src={assets.search_icon}
+                className="w-5 cursor-pointer hover:scale-110 transition-transform"
+                alt="Search"
+              />
+            </Link>
+
+            {/* Profile */}
+            <div className="group relative">
+              <img
+                onClick={() => (token ? null : navigate("/login"))}
+                src={assets.profile_icon}
+                className="w-5 cursor-pointer hover:scale-110 transition-transform"
+                alt="Profile"
+              />
+
+              {token && (
+                <div className="group-hover:block hidden absolute right-0 pt-4">
+                  <div className="flex flex-col gap-3 w-40 py-4 px-5 bg-white text-gray-600 rounded-lg shadow-xl border border-gray-100">
+                    <p className="font-semibold text-black">
+                      {user?.name || "User"}
+                    </p>
+
+                    <p
+                      onClick={() => navigate("/orders")}
+                      className="cursor-pointer hover:text-black"
+                    >
+                      Orders
+                    </p>
+
+                    <p
+                      onClick={logout}
+                      className="cursor-pointer hover:text-black"
+                    >
+                      Logout
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Cart */}
+            <Link to="/cart" className="relative">
+              <img
+                src={assets.cart_icon}
+                className="w-5 min-w-5 hover:scale-110 transition-transform"
+                alt="Cart"
+              />
+
+              <p className="absolute right-[-7px] bottom-[-7px] w-4 h-4 flex items-center justify-center bg-black text-white rounded-full text-[9px]">
+                {getCartItems()}
+              </p>
+            </Link>
+
+            {/* Mobile Menu */}
+            <img
+              onClick={() => setVisible(true)}
+              src={assets.menu_icon}
+              className="w-5 cursor-pointer sm:hidden"
+              alt="Menu"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Drawer */}
+      <div
+        className={`fixed top-0 right-0 h-screen bg-white z-[60] transition-all duration-300 ${
+          visible ? "w-72" : "w-0"
+        } overflow-hidden shadow-2xl sm:hidden`}
+      >
+        <button
+          onClick={() => setVisible(false)}
+          className="absolute top-5 right-5 text-xl text-gray-700"
+        >
+          ✕
+        </button>
+
+        <ul className="flex flex-col gap-6 mt-20 px-8 text-gray-700 font-semibold">
+          {["Home", "Collection", "About", "Contact", "Orders"].map((item, index) => (
+            <NavLink
+              to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+              key={index}
+              onClick={() => setVisible(false)}
+              className="py-3 border-b border-gray-200 hover:text-black"
+            >
+              {item}
+            </NavLink>
+          ))}
+        </ul>
+      </div>
+    </nav>
+  );
+}
+
+export default Navbar;
