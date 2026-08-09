@@ -75,27 +75,20 @@ const FeaturedCategories = () => {
             <div className="absolute inset-0 bg-black/35 group-hover:bg-black/45 transition"></div>
 
             {/* Title & Tagline */}
-            <div
-              className={`absolute left-8 ${
-                item.title === "Watches" ? "bottom-20" : "bottom-16"
-              }`}
-            >
-              <h3
-                className="text-white text-3xl"
-                style={{ fontFamily: "'Prata', serif" }}
-              >
-                {item.title}
-              </h3>
-
-              <p
-		  className={`text-white/80 text-sm max-w-[220px] ${
-		    item.title === "Watches" ? "mt-1" : "mt-0"
-		  }`}
-		  style={{ fontFamily: "'Courier New', serif" }}
-		>
-		  {item.tagline}
-		</p>
-            </div>
+            <div className="absolute left-8 bottom-20">
+	  <h3
+	    className="text-white text-3xl"
+	    style={{ fontFamily: "'Prata', serif" }}
+	  >
+	    {item.title}
+	  </h3>
+	  <p
+	    className="text-white/80 text-sm max-w-[220px] mt-1"
+	    style={{ fontFamily: "'Prata', serif" }}
+	  >
+	    {item.tagline}
+	  </p>
+	</div>
 
             {/* Button */}
             <button
