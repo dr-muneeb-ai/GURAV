@@ -10,19 +10,19 @@ const categories = [
   },
   {
     title: "Sneakers",
-    tagline: "Athletic sneakers & lifestyle",
+    tagline: "Sneakers & lifestyle",
     buttonText: "Select your Sneakers →",
     image: "/sneaker.png",
   },
   {
     title: "Hoodies",
-    tagline: "Cotton, & Streetwear hoodies",
+    tagline: "Cotton, & Street hoodies",
     buttonText: "Select your Hoodie →",
     image: "/hoodie.png",
   },
   {
     title: "Accessories",
-    tagline: "Wallets, belts & leather goods",
+    tagline: "Wallets, belts & leather",
     buttonText: "Select your Accessories →",
     image: "/accessories.png",
   },
