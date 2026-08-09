@@ -2,12 +2,12 @@ import React, { useRef, useEffect } from "react";
 
 // 👉 Replace these paths with your actual video files from your assets folder
 const videos = [
-  "/videos/video1.mp4",
-  "/videos/video2.mp4",
-  "/videos/video3.mp4",
-  "/videos/video4.mp4",
-  "/videos/video5.mp4",
-  "/videos/video6.mp4",
+  "/video1.mp4",
+  "/video2.mp4",
+  "/video3.mp4",
+  "/video4.mp4",
+  "/video5.mp4",
+  "/video6.mp4",
 ];
 
 // 👉 Yahan se speed control karo (0.5 = half speed / slow, 1 = normal speed, 0.25 = bohot slow)
