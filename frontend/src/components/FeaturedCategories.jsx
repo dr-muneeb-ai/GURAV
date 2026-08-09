@@ -6,25 +6,25 @@ const categories = [
     title: "Watches",
     tagline: "Luxury, durable watches",
     buttonText: "Select your Watch →",
-    image: "/ItemImages/watch.jpeg",
+    image: "/watch.jpeg",
   },
   {
     title: "Sneakers",
     tagline: "Athletic sneakers & lifestyle",
     buttonText: "Select your Sneakers →",
-    image: "/ItemImages/sneaker.png",
+    image: "/sneaker.png",
   },
   {
     title: "Hoodies",
     tagline: "Cotton, & Streetwear hoodies",
     buttonText: "Select your Hoodie →",
-    image: "/ItemImages/hoodie.png",
+    image: "/hoodie.png",
   },
   {
     title: "Accessories",
     tagline: "Wallets, belts & leather goods",
     buttonText: "Select your Accessories →",
-    image: "/ItemImages/accessories.png",
+    image: "/accessories.png",
   },
 ];
 
