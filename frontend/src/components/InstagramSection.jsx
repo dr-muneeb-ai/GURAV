@@ -11,7 +11,7 @@ const videos = [
 ];
 
 // 👉 Yahan se speed control karo (0.5 = half speed / slow, 1 = normal speed, 0.25 = bohot slow)
-const VIDEO_SPEED = 0.5;
+const VIDEO_SPEED = 0.8;
 
 const InstagramSection = () => {
   const videoRefs = useRef([]);
