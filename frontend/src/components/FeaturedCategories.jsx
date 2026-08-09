@@ -84,19 +84,19 @@ const FeaturedCategories = () => {
 	  </h3>
 	  <p
 	    className="text-white/80 text-sm max-w-[220px] mt-1"
-	    style={{ fontFamily: "'Prata', serif" }}
+	    style={{ fontFamily: "'Courier New', serif" }}
 	  >
 	    {item.tagline}
 	  </p>
 	</div>
 
-            {/* Button */}
-            <button
-              className="absolute left-8 bottom-8 glow-btn px-5 py-2 rounded-full border border-[#D3D3D3] bg-black/30 text-white text-xs tracking-widest hover:bg-[#D3D3D3] hover:text-black transition-colors duration-300"
-              style={{ fontFamily: "'Georgia', serif" }}
-            >
-              {item.buttonText}
-            </button>
+           
+	<button
+	  className="absolute left-8 bottom-8 glow-btn px-5 py-2 rounded-full border border-[#D3D3D3] bg-black/30 text-white text-[11px] sm:text-xs tracking-widest whitespace-nowrap hover:bg-[#D3D3D3] hover:text-black transition-colors duration-300"
+	  style={{ fontFamily: "'Georgia', serif" }}
+	>
+	  {item.buttonText}
+	</button>
           </div>
         ))}
       </div>
