@@ -29,7 +29,7 @@ const categories = [
 const FeaturedCategories = () => {
   const navigate = useNavigate();
   return (
-    <section className="py-14 px-4 lg:px-8">
+    <section className="py-14 px-2 lg:px-8">
       <style>{`
         @keyframes glowPulse {
           0%, 100% {
@@ -53,12 +53,12 @@ const FeaturedCategories = () => {
           Open Your Closet
         </h2>
       </div>
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-6">
         {categories.map((item) => (
           <div
             key={item.title}
             onClick={() => navigate("/collection")}
-            className="group relative overflow-hidden rounded-2xl sm:rounded-3xl cursor-pointer h-[230px] sm:h-[310px]"
+            className="group relative overflow-hidden rounded-2xl sm:rounded-3xl cursor-pointer aspect-square"
           >
             <img
               src={item.image}
