@@ -101,7 +101,7 @@ const Hero = () => {
                   fontSize: "clamp(0.8rem, 1vw, 0.875rem)",
                 }}
               >
-                Shop Collection
+                Shop the Collection
               </button>
               
 
