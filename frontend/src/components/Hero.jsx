@@ -29,7 +29,7 @@ const Hero = () => {
 
   return (
     <section className="w-full bg-[#D3D3D3] ">
-      <div className="flex flex-col lg:flex-row min-h-[650px]">
+      <div className="flex flex-col lg:flex-row min-h-fit lg:min-h-[650px]">
 
         {/* LEFT CONTENT */}
         <div className="w-full lg:w-1/2 flex items-center px-8 sm:px-12 lg:px-16 xl:px-20 py-16">
@@ -111,8 +111,8 @@ const Hero = () => {
           </div>
         </div>
 	{/*Right imGE*/}
-	<div className="w-full lg:w-[54%] flex justify-end items-center p-6">
-	  <div className="hero-image w-full max-w-[650px] h-[600px] overflow-hidden rounded-3xl border-2 border-transparent shadow-2xl">
+	<div className="w-full lg:w-[54%] flex justify-center lg:justify-end items-center p-6">
+	  <div className="hero-image w-full max-w-[650px] h-[420px] sm:h-[500px] lg:h-[600px] overflow-hidden rounded-3xl border-2 border-transparent shadow-2xl">
 
 	    <Swiper
 	      modules={[Autoplay]}
