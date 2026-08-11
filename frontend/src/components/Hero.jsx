@@ -70,12 +70,12 @@ const Hero = () => {
             </p>
 
             {/* Buttons */}
-            <div className="flex flex-wrap gap-4 mt-8">
+            <div className="flex flex-nowrap gap-2 sm:gap-4 mt-8">
 
               {/* Shop Collection */}
               <button
                 onClick={() => navigate("/collection")}
-                className="bg-[#1d1d1b] text-white px-8 py-4 rounded-full text-sm font-semibold hover:bg-[#b9572c] transition-all duration-300"
+                className="bg-[#1d1d1b] text-white px-4 sm:px-8 py-3 sm:py-4 rounded-full text-xs sm:text-sm font-semibold hover:bg-[#b9572c] transition-all duration-300 whitespace-nowrap"
               >
                 Shop the collection
               </button>
@@ -84,7 +84,7 @@ const Hero = () => {
               {/* Explore More */}
               <button
                 onClick={scrollToProducts}
-                  className="border border-[#b9572c] text-[#1d1d1b] px-8 py-4 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-[#b9572c] hover:text-white hover:shadow-[0_0_20px_rgba(0,0,0,0.6)] hover:scale-105"
+                  className="border border-[#b9572c] text-[#1d1d1b] px-4 sm:px-8 py-3 sm:py-4 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 hover:bg-[#b9572c] hover:text-white hover:shadow-[0_0_20px_rgba(0,0,0,0.6)] hover:scale-105 whitespace-nowrap"
 
               >
                 Explore More
