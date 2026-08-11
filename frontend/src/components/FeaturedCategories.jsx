@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
 const categories = [
   {
     title: "Watches",
@@ -27,10 +26,8 @@ const categories = [
     image: "/accessories.png",
   },
 ];
-
 const FeaturedCategories = () => {
   const navigate = useNavigate();
-
   return (
     <section className="py-14 px-4 lg:px-8">
       <style>{`
@@ -44,40 +41,35 @@ const FeaturedCategories = () => {
                         0 0 26px rgba(211,211,211,0.55);
           }
         }
-
         .glow-btn {
           animation: glowPulse 2.5s ease-in-out infinite;
         }
       `}</style>
-
       <div className="text-center mb-14">
         <h2
-          className="text-5xl mt-4 font-extrabold"
+          className="text-4xl sm:text-5xl mt-4 font-extrabold"
           style={{ fontFamily: "'Prata', serif" }}
         >
           Open Your Closet
         </h2>
       </div>
-
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {categories.map((item) => (
           <div
             key={item.title}
             onClick={() => navigate("/collection")}
-            className="group relative overflow-hidden rounded-3xl cursor-pointer h-[300px]"
+            className="group relative overflow-hidden rounded-3xl cursor-pointer h-[420px] sm:h-[300px]"
           >
             <img
               src={item.image}
               alt={item.title}
               className="w-full h-full object-cover transition duration-700 group-hover:scale-110"
             />
-
             <div className="absolute inset-0 bg-black/35 group-hover:bg-black/45 transition"></div>
-
             {/* Title & Tagline */}
-            <div className="absolute left-8 bottom-20">
+            <div className="absolute left-6 sm:left-8 bottom-24 sm:bottom-20">
 	  <h3
-	    className="text-white text-3xl"
+	    className="text-white text-3xl sm:text-3xl"
 	    style={{ fontFamily: "'Prata', serif" }}
 	  >
 	    {item.title}
@@ -89,10 +81,9 @@ const FeaturedCategories = () => {
 	    {item.tagline}
 	  </p>
 	</div>
-
            
 	<button
-	  className="absolute left-8 bottom-8 glow-btn px-5 py-2 rounded-full border border-[#D3D3D3] bg-black/30 text-white text-[11px] sm:text-xs tracking-widest whitespace-nowrap hover:bg-[#D3D3D3] hover:text-black transition-colors duration-300"
+	  className="absolute left-6 sm:left-8 bottom-8 glow-btn px-5 py-2 rounded-full border border-[#D3D3D3] bg-black/30 text-white text-[11px] sm:text-xs tracking-widest whitespace-nowrap hover:bg-[#D3D3D3] hover:text-black transition-colors duration-300"
 	  style={{ fontFamily: "'Georgia', serif" }}
 	>
 	  {item.buttonText}
@@ -103,5 +94,4 @@ const FeaturedCategories = () => {
     </section>
   );
 };
-
 export default FeaturedCategories;
