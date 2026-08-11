@@ -58,7 +58,7 @@ const FeaturedCategories = () => {
           <div
             key={item.title}
             onClick={() => navigate("/collection")}
-            className="group relative overflow-hidden rounded-2xl sm:rounded-3xl cursor-pointer aspect-square"
+            className="group relative overflow-hidden rounded-2xl sm:rounded-3xl cursor-pointer h-[230px] sm:h-[310px]"
           >
             <img
               src={item.image}
