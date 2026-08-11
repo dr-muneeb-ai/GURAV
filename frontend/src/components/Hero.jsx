@@ -32,7 +32,7 @@ const Hero = () => {
       <div className="flex flex-col lg:flex-row min-h-fit lg:min-h-[650px]">
 
         {/* LEFT CONTENT */}
-        <div className="w-full lg:w-1/2 flex items-center px-8 sm:px-12 lg:px-16 xl:px-20 py-16">
+        <div className="w-full lg:w-1/2 flex items-center px-5 sm:px-12 lg:px-16 xl:px-20 py-10 sm:py-16">
           <div className="max-w-xl">
 
             {/* Small Label */}
@@ -70,21 +70,21 @@ const Hero = () => {
             </p>
 
             {/* Buttons */}
-            <div className="flex flex-nowrap gap-3 sm:gap-4 mt-8">
+            <div className="flex flex-nowrap gap-2.5 sm:gap-4 mt-6 sm:mt-8">
 
               {/* Shop Collection */}
               <button
                 onClick={() => navigate("/collection")}
-                className="bg-[#1d1d1b] text-white px-5 sm:px-8 py-3.5 sm:py-4 rounded-full text-sm font-semibold hover:bg-[#b9572c] transition-all duration-300 whitespace-nowrap"
+                className="bg-[#1d1d1b] text-white px-4 sm:px-8 py-3 sm:py-4 rounded-full text-xs sm:text-sm font-semibold hover:bg-[#b9572c] transition-all duration-300 whitespace-nowrap"
               >
-                Shop the collection
+                Shop Collection
               </button>
               
 
               {/* Explore More */}
               <button
                 onClick={scrollToProducts}
-                  className="border border-[#b9572c] text-[#1d1d1b] px-5 sm:px-8 py-3.5 sm:py-4 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-[#b9572c] hover:text-white hover:shadow-[0_0_20px_rgba(0,0,0,0.6)] hover:scale-105 whitespace-nowrap"
+                  className="border border-[#b9572c] text-[#1d1d1b] px-4 sm:px-8 py-3 sm:py-4 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 hover:bg-[#b9572c] hover:text-white hover:shadow-[0_0_20px_rgba(0,0,0,0.6)] hover:scale-105 whitespace-nowrap"
 
               >
                 Explore More
@@ -93,7 +93,7 @@ const Hero = () => {
             </div>
 
             {/* Rating */}
-            <div className="flex gap-8 sm:gap-12 mt-10 ">
+            <div className="flex gap-8 sm:gap-12 mt-7 sm:mt-10 ">
               <div>
                 <h3
                   className="text-2xl sm:text-3xl text-[#1d1d1b]"
@@ -111,8 +111,8 @@ const Hero = () => {
           </div>
         </div>
 	{/*Right imGE*/}
-	<div className="w-full lg:w-[54%] flex justify-center lg:justify-end items-center p-6">
-	  <div className="hero-image w-full max-w-[650px] h-[420px] sm:h-[500px] lg:h-[600px] overflow-hidden rounded-3xl border-2 border-transparent shadow-2xl">
+	<div className="w-full lg:w-[54%] flex justify-center lg:justify-end items-center px-5 pb-10 pt-2 sm:p-6">
+	  <div className="hero-image w-full max-w-[650px] h-[340px] sm:h-[500px] lg:h-[600px] overflow-hidden rounded-2xl sm:rounded-3xl border-2 border-transparent shadow-2xl">
 
 	    <Swiper
 	      modules={[Autoplay]}
