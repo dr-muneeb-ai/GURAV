@@ -45,7 +45,7 @@ const FeaturedCategories = () => {
           animation: glowPulse 2.5s ease-in-out infinite;
         }
       `}</style>
-      <div className="text-center mb-14">
+      <div className="text-center mb-10 sm:mb-14">
         <h2
           className="text-4xl sm:text-5xl mt-4 font-extrabold"
           style={{ fontFamily: "'Prata', serif" }}
@@ -53,12 +53,12 @@ const FeaturedCategories = () => {
           Open Your Closet
         </h2>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
         {categories.map((item) => (
           <div
             key={item.title}
             onClick={() => navigate("/collection")}
-            className="group relative overflow-hidden rounded-3xl cursor-pointer h-[420px] sm:h-[300px]"
+            className="group relative overflow-hidden rounded-2xl sm:rounded-3xl cursor-pointer h-[230px] sm:h-[300px]"
           >
             <img
               src={item.image}
@@ -67,15 +67,15 @@ const FeaturedCategories = () => {
             />
             <div className="absolute inset-0 bg-black/35 group-hover:bg-black/45 transition"></div>
             {/* Title & Tagline */}
-            <div className="absolute left-6 sm:left-8 bottom-24 sm:bottom-20">
+            <div className="absolute left-4 sm:left-8 bottom-16 sm:bottom-20">
 	  <h3
-	    className="text-white text-3xl sm:text-3xl"
+	    className="text-white text-xl sm:text-3xl"
 	    style={{ fontFamily: "'Prata', serif" }}
 	  >
 	    {item.title}
 	  </h3>
 	  <p
-	    className="text-white/80 text-sm max-w-[220px] mt-1"
+	    className="text-white/80 text-[10px] sm:text-sm max-w-[140px] sm:max-w-[220px] mt-1"
 	    style={{ fontFamily: "'Courier New', serif" }}
 	  >
 	    {item.tagline}
@@ -83,7 +83,7 @@ const FeaturedCategories = () => {
 	</div>
            
 	<button
-	  className="absolute left-6 sm:left-8 bottom-8 glow-btn px-5 py-2 rounded-full border border-[#D3D3D3] bg-black/30 text-white text-[11px] sm:text-xs tracking-widest whitespace-nowrap hover:bg-[#D3D3D3] hover:text-black transition-colors duration-300"
+	  className="absolute left-4 sm:left-8 bottom-4 sm:bottom-8 glow-btn px-3 py-1.5 sm:px-5 sm:py-2 rounded-full border border-[#D3D3D3] bg-black/30 text-white text-[8px] sm:text-xs tracking-widest whitespace-nowrap hover:bg-[#D3D3D3] hover:text-black transition-colors duration-300"
 	  style={{ fontFamily: "'Georgia', serif" }}
 	>
 	  {item.buttonText}
