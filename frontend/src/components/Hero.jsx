@@ -32,7 +32,15 @@ const Hero = () => {
       <div className="flex flex-col lg:flex-row min-h-fit lg:min-h-[650px]">
 
         {/* LEFT CONTENT */}
-        <div className="w-full lg:w-1/2 flex items-center px-5 sm:px-12 lg:px-16 xl:px-20 py-10 sm:py-16">
+        <div
+          className="w-full lg:w-1/2 flex items-center"
+          style={{
+            paddingLeft: "clamp(1.25rem, 5vw, 5rem)",
+            paddingRight: "clamp(1.25rem, 5vw, 5rem)",
+            paddingTop: "clamp(2.5rem, 6vw, 4rem)",
+            paddingBottom: "clamp(2.5rem, 6vw, 4rem)",
+          }}
+        >
           <div className="max-w-xl">
 
             {/* Small Label */}
@@ -40,8 +48,11 @@ const Hero = () => {
               <span className="w-8 h-[1px] bg-[#b9572c]"></span>
 
               <p
-                className="text-xs sm:text-sm tracking-[0.25em] uppercase text-[#b9572c] font-extrabold"
-                style={{ fontFamily: "'Playfair Display', serif" }}
+                className="tracking-[0.25em] uppercase text-[#b9572c] font-extrabold"
+                style={{
+                  fontFamily: "'Playfair Display', serif",
+                  fontSize: "clamp(0.7rem, 1.1vw, 0.875rem)",
+                }}
               >
                 New Collection .
               </p>
@@ -49,8 +60,11 @@ const Hero = () => {
 
             {/* Heading */}
             <h1
-              className="text-5xl sm:text-6xl lg:text-7xl leading-[1.05] text-[#1d1d1b] text-extrabold"
-              style={{ fontFamily: "'Prata', serif" }}
+              className="leading-[1.05] text-[#1d1d1b] text-extrabold"
+              style={{
+                fontFamily: "'Prata', serif",
+                fontSize: "clamp(2.4rem, 6vw, 4.5rem)",
+              }}
             >
               Latest
               <br />
@@ -64,7 +78,10 @@ const Hero = () => {
             </h1>
 
             {/* Description */}
-            <p className="mt-7 max-w-md text-gray-600 text-base leading-7">
+            <p
+              className="mt-7 max-w-md text-gray-600 leading-7"
+              style={{ fontSize: "clamp(0.9rem, 1.2vw, 1rem)" }}
+            >
               Explore our newest collection of careful designed 
               items that will help to enhance your daily life.
             </p>
@@ -75,7 +92,14 @@ const Hero = () => {
               {/* Shop Collection */}
               <button
                 onClick={() => navigate("/collection")}
-                className="bg-[#1d1d1b] text-white px-5 sm:px-8 py-3.5 sm:py-4 rounded-full text-sm sm:text-sm font-semibold hover:bg-[#b9572c] transition-all duration-300 whitespace-nowrap"
+                className="bg-[#1d1d1b] text-white rounded-full font-semibold hover:bg-[#b9572c] transition-all duration-300 whitespace-nowrap"
+                style={{
+                  paddingLeft: "clamp(1.1rem, 2vw, 2rem)",
+                  paddingRight: "clamp(1.1rem, 2vw, 2rem)",
+                  paddingTop: "clamp(0.7rem, 1.2vw, 1rem)",
+                  paddingBottom: "clamp(0.7rem, 1.2vw, 1rem)",
+                  fontSize: "clamp(0.8rem, 1vw, 0.875rem)",
+                }}
               >
                 Shop Collection
               </button>
@@ -84,8 +108,14 @@ const Hero = () => {
               {/* Explore More */}
               <button
                 onClick={scrollToProducts}
-                  className="border border-[#b9572c] text-[#1d1d1b] px-5 sm:px-8 py-3.5 sm:py-4 rounded-full text-sm sm:text-sm font-semibold transition-all duration-300 hover:bg-[#b9572c] hover:text-white hover:shadow-[0_0_20px_rgba(0,0,0,0.6)] hover:scale-105 whitespace-nowrap"
-
+                className="border border-[#b9572c] text-[#1d1d1b] rounded-full font-semibold transition-all duration-300 hover:bg-[#b9572c] hover:text-white hover:shadow-[0_0_20px_rgba(0,0,0,0.6)] hover:scale-105 whitespace-nowrap"
+                style={{
+                  paddingLeft: "clamp(1.1rem, 2vw, 2rem)",
+                  paddingRight: "clamp(1.1rem, 2vw, 2rem)",
+                  paddingTop: "clamp(0.7rem, 1.2vw, 1rem)",
+                  paddingBottom: "clamp(0.7rem, 1.2vw, 1rem)",
+                  fontSize: "clamp(0.8rem, 1vw, 0.875rem)",
+                }}
               >
                 Explore More
               </button>
@@ -96,8 +126,11 @@ const Hero = () => {
             <div className="flex gap-8 sm:gap-12 mt-7 sm:mt-10 ">
               <div>
                 <h3
-                  className="text-2xl sm:text-3xl text-[#1d1d1b]"
-                  style={{ fontFamily: "'Prata', serif" }}
+                  className="text-[#1d1d1b]"
+                  style={{
+                    fontFamily: "'Prata', serif",
+                    fontSize: "clamp(1.5rem, 2.2vw, 1.875rem)",
+                  }}
                 >
                   4.8/5
                 </h3>
@@ -111,8 +144,16 @@ const Hero = () => {
           </div>
         </div>
 	{/*Right imGE*/}
-	<div className="w-full lg:w-[54%] flex justify-center lg:justify-end items-center px-5 pb-10 pt-2 sm:p-6">
-	  <div className="hero-image w-full max-w-[650px] h-[340px] sm:h-[500px] lg:h-[600px] overflow-hidden rounded-2xl sm:rounded-3xl border-2 border-transparent shadow-2xl">
+	<div
+	  className="w-full lg:w-[54%] flex justify-center lg:justify-end items-center"
+	  style={{
+	    padding: "clamp(1rem, 2vw, 1.5rem)",
+	  }}
+	>
+	  <div
+	    className="hero-image w-full max-w-[650px] overflow-hidden rounded-2xl sm:rounded-3xl border-2 border-transparent shadow-2xl"
+	    style={{ height: "clamp(320px, 42vw, 600px)" }}
+	  >
 
 	    <Swiper
 	      modules={[Autoplay]}
