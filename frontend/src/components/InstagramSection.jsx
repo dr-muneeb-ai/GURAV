@@ -25,7 +25,7 @@ const InstagramSection = () => {
   }, []);
 
   return (
-    <section className="relative py-24 md:py-32 overflow-hidden">
+    <section className="relative py-16 sm:py-24 md:py-32 overflow-hidden">
 
       {/* Subtle premium texture */}
       <div
@@ -41,24 +41,24 @@ const InstagramSection = () => {
       <div className="absolute top-0 left-0 w-96 h-96 bg-[#b9572c]/10 rounded-full blur-3xl" />
       <div className="absolute bottom-0 right-0 w-[28rem] h-[28rem] bg-[#b9572c]/5 rounded-full blur-3xl" />
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
 
         {/* INSTAGRAM SECTION */}
-        <div className="grid lg:grid-cols-[0.8fr_1.2fr] gap-14 lg:gap-20 items-center">
+        <div className="grid lg:grid-cols-[0.8fr_1.2fr] gap-10 sm:gap-14 lg:gap-20 items-center">
 
           {/* LEFT CONTENT */}
           <div className="max-w-xl">
 
-            <div className="flex items-center gap-4 mb-6">
+            <div className="flex items-center gap-4 mb-5 sm:mb-6">
               <span className="h-px w-10 bg-[#b9572c]" />
 
-              <p className="uppercase tracking-[6px] text-[#d4774c] text-xs font-semibold">
+              <p className="uppercase tracking-[4px] sm:tracking-[6px] text-[#d4774c] text-xs font-semibold">
                 Instagram
               </p>
             </div>
 
             <h2
-              className="text-5xl md:text-6xl lg:text-7xl leading-[1.05] text-white"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] text-white"
               style={{ fontFamily: "'Prata', serif" }}
             >
               Follow
@@ -69,7 +69,7 @@ const InstagramSection = () => {
               </span>
             </h2>
 
-            <p className="mt-7 text-black text-base md:text-lg leading-8 max-w-md"
+            <p className="mt-5 sm:mt-7 text-black text-sm sm:text-base md:text-lg leading-7 sm:leading-8 max-w-md"
             style={{ fontFamily: "'Prata', serif" }}>
               Discover our latest drops, styling inspiration,
               behind-the-scenes moments and premium streetwear
@@ -84,12 +84,16 @@ const InstagramSection = () => {
                 group
                 inline-flex
                 items-center
-                gap-4
-                mt-9
+                gap-3
+                sm:gap-4
+                mt-7
+                sm:mt-9
                 bg-[#000000]
                 text-white
-                px-7
-                py-4
+                px-6
+                sm:px-7
+                py-3.5
+                sm:py-4
                 rounded-full
                 text-sm
                 font-medium
@@ -111,7 +115,7 @@ const InstagramSection = () => {
           </div>
 
           {/* RIGHT VIDEO GRID */}
-          <div className="grid grid-cols-3 gap-3 md:gap-2">
+          <div className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-2">
 
             {videos.map((videoSrc, index) => (
               <a
@@ -123,7 +127,8 @@ const InstagramSection = () => {
                   group
                   relative
                   overflow-hidden
-                  rounded-xl
+                  rounded-lg
+                  sm:rounded-xl
                   md:rounded-2xl
                   bg-white/5
                   border
@@ -181,8 +186,10 @@ const InstagramSection = () => {
                   "
                 >
                   <div className="
-                    h-11
-                    w-11
+                    h-9
+                    w-9
+                    sm:h-11
+                    sm:w-11
                     rounded-full
                     bg-white/90
                     backdrop-blur-sm
@@ -205,7 +212,7 @@ const InstagramSection = () => {
 
 
         {/* PREMIUM DIVIDER */}
-        <div className="flex items-center gap-5 my-24">
+        <div className="flex items-center gap-5 my-16 sm:my-24">
           <div className="h-px flex-1 bg-white/10" />
           <div className="h-2 w-2 rounded-full bg-[#b9572c]" />
           <div className="h-px flex-1 bg-white/10" />
@@ -217,14 +224,17 @@ const InstagramSection = () => {
           className="
             relative
             overflow-hidden
-            rounded-[32px]
+            rounded-[24px]
+            sm:rounded-[32px]
             bg-gradient-to-br
             from-[#1c1c1c]
             to-[#111111]
             border
             border-[#b9572c]/20
-            px-6
-            py-16
+            px-5
+            sm:px-6
+            py-12
+            sm:py-16
             md:px-12
             lg:px-20
             md:py-20
@@ -264,7 +274,8 @@ const InstagramSection = () => {
 
             <p className="
               uppercase
-              tracking-[6px]
+              tracking-[4px]
+              sm:tracking-[6px]
               text-[#d4774c]
               text-xs
               font-semibold
@@ -273,14 +284,15 @@ const InstagramSection = () => {
             </p>
 
             <h2
-              className="text-4xl md:text-5xl lg:text-6xl text-white mt-5"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white mt-4 sm:mt-5"
               style={{ fontFamily: "'Prata', serif" }}
             >
               Get Early Access
             </h2>
 
             <p className="
-              mt-5
+              mt-4
+              sm:mt-5
               text-white/60
               text-sm
               md:text-base
@@ -298,7 +310,8 @@ const InstagramSection = () => {
               sm:flex-row
               justify-center
               gap-3
-              mt-9
+              mt-7
+              sm:mt-9
               max-w-xl
               mx-auto
             ">
@@ -308,8 +321,11 @@ const InstagramSection = () => {
                 placeholder="Enter your email address"
                 className="
                   flex-1
-                  px-6
-                  py-4
+                  min-w-0
+                  px-5
+                  sm:px-6
+                  py-3.5
+                  sm:py-4
                   rounded-full
                   bg-white/10
                   border
@@ -328,7 +344,8 @@ const InstagramSection = () => {
                   bg-[#b9572c]
                   text-white
                   px-8
-                  py-4
+                  py-3.5
+                  sm:py-4
                   rounded-full
                   font-medium
                   tracking-wide
@@ -336,6 +353,7 @@ const InstagramSection = () => {
                   transition-all
                   duration-300
                   shadow-lg
+                  whitespace-nowrap
                 "
               >
                 Subscribe
@@ -344,7 +362,8 @@ const InstagramSection = () => {
             </div>
 
             <p className="
-              mt-5
+              mt-4
+              sm:mt-5
               text-[11px]
               uppercase
               tracking-[2px]
