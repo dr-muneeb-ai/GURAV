@@ -24,7 +24,7 @@ const ProductItem = ({
     <Link to={`/product/${id}`} className="group w-full block">
       <div className="bg-white rounded-2xl overflow-hidden border border-[#eadfce] shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-500">
         {/* IMAGE */}
-        <div className="relative w-full h-72 sm:h-80 bg-[#f5f2ec] overflow-hidden">
+        <div className="relative w-full aspect-square bg-[#f5f2ec] overflow-hidden">
           {imageUrl && !imgError ? (
             <img
               src={imageUrl}
