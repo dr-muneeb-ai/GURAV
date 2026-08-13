@@ -64,13 +64,18 @@ const Payment = () => {
 
   const inputStyle = `
     w-full
-    h-14
-    px-5
-    rounded-2xl
+    h-12
+    sm:h-14
+    px-4
+    sm:px-5
+    rounded-xl
+    sm:rounded-2xl
     bg-[#181818]
     border
     border-[#2d2d2d]
     text-white
+    text-sm
+    sm:text-base
     outline-none
     transition-all
     duration-300
@@ -263,24 +268,26 @@ const Payment = () => {
 
       <div className="absolute w-[380px] h-[380px] bg-[#B9572C]/10 blur-[130px] rounded-full bottom-0 right-0"></div>
 
-      <div className="max-w-7xl mx-auto py-14 px-5">
+      <div className="max-w-7xl mx-auto py-8 sm:py-14 px-3 sm:px-5">
 
-        <div className="mb-12">
+        <div className="mb-6 sm:mb-12">
           <Title text1={"PAYMENT"} text2={"DETAILS"} />
         </div>
 
-        <div className="grid lg:grid-cols-[1.8fr_1fr] gap-10">
+        <div className="grid lg:grid-cols-[1.8fr_1fr] gap-6 sm:gap-10">
 
           {/* ================= LEFT SIDE ================= */}
 
           <div
             className="
-              rounded-[35px]
+              rounded-[22px]
+              sm:rounded-[35px]
               bg-white/5
               backdrop-blur-xl
               border
               border-white/10
-              p-10
+              p-4
+              sm:p-10
             "
           >
 
@@ -290,19 +297,19 @@ const Payment = () => {
 
               <>
                 <h2
-                  className="text-2xl text-[#B9572C] mb-6"
+                  className="text-lg sm:text-2xl text-[#B9572C] mb-3 sm:mb-6"
                   style={{ fontFamily: "'Prata', serif" }}
                 >
                   Cash On Delivery
                 </h2>
 
-                <div className="rounded-3xl bg-[#181818] border border-[#2d2d2d] p-8">
+                <div className="rounded-2xl sm:rounded-3xl bg-[#181818] border border-[#2d2d2d] p-4 sm:p-8">
 
-                  <p className="text-lg">
+                  <p className="text-sm sm:text-lg">
                     You will pay after receiving your order.
                   </p>
 
-                  <div className="mt-5 flex justify-between">
+                  <div className="mt-3 sm:mt-5 flex justify-between text-sm sm:text-base">
 
                     <span>Cash Handling Fee</span>
 
@@ -324,15 +331,15 @@ const Payment = () => {
 
               <>
                 <h2
-                  className="text-2xl text-[#635BFF] mb-6"
+                  className="text-lg sm:text-2xl text-[#635BFF] mb-3 sm:mb-6"
                   style={{ fontFamily: "'Prata', serif" }}
                 >
                   Stripe Checkout
                 </h2>
 
-                <div className="rounded-3xl bg-[#181818] border border-[#2d2d2d] p-8">
+                <div className="rounded-2xl sm:rounded-3xl bg-[#181818] border border-[#2d2d2d] p-4 sm:p-8">
 
-                  <p className="text-lg">
+                  <p className="text-sm sm:text-lg">
                     After clicking <b>Pay Now</b> you will be redirected securely to Stripe Checkout.
                     We never see or store your card details.
                   </p>
@@ -349,15 +356,15 @@ const Payment = () => {
 
               <>
                 <h2
-                  className="text-2xl text-[#0070BA] mb-6"
+                  className="text-lg sm:text-2xl text-[#0070BA] mb-3 sm:mb-6"
                   style={{ fontFamily: "'Prata', serif" }}
                 >
                   PayPal Checkout
                 </h2>
 
-                <div className="rounded-3xl bg-[#181818] border border-[#2d2d2d] p-8">
+                <div className="rounded-2xl sm:rounded-3xl bg-[#181818] border border-[#2d2d2d] p-4 sm:p-8">
 
-                  <p className="text-lg">
+                  <p className="text-sm sm:text-lg">
                     After clicking <b>Pay Now</b> you will continue to PayPal's secure checkout.
                   </p>
 
@@ -369,16 +376,16 @@ const Payment = () => {
 
             {/* ================= SHIPPING FORM ================= */}
 
-            <div className="mt-10">
+            <div className="mt-6 sm:mt-10">
 
               <h2
-                className="text-2xl mb-6"
+                className="text-lg sm:text-2xl mb-3 sm:mb-6"
                 style={{ fontFamily: "'Prata', serif" }}
               >
                 Shipping Information
               </h2>
 
-              <div className="grid md:grid-cols-2 gap-5">
+              <div className="grid md:grid-cols-2 gap-3 sm:gap-5">
 
                 <input
                   name="firstName"
@@ -473,19 +480,21 @@ const Payment = () => {
 
             <div
               className="
-                rounded-[35px]
+                rounded-[22px]
+                sm:rounded-[35px]
                 bg-white/5
                 backdrop-blur-xl
                 border
                 border-white/10
-                p-8
-                sticky
-                top-8
+                p-4
+                sm:p-8
+                lg:sticky
+                lg:top-8
               "
             >
 
               <h2
-                className="text-3xl mb-8"
+                className="text-xl sm:text-3xl mb-4 sm:mb-8"
                 style={{ fontFamily: "'Prata', serif" }}
               >
                 Order Summary
@@ -495,9 +504,9 @@ const Payment = () => {
 
               {method === "cod" && (
 
-                <div className="mt-6">
+                <div className="mt-4 sm:mt-6">
 
-                  <div className="flex justify-between text-lg">
+                  <div className="flex justify-between text-sm sm:text-lg">
 
                     <span>Cash On Delivery Fee</span>
 
@@ -511,16 +520,16 @@ const Payment = () => {
 
               )}
 
-              <div className="border-t border-white/10 my-7"></div>
+              <div className="border-t border-white/10 my-4 sm:my-7"></div>
 
               <div className="flex justify-between items-center">
 
-                <span className="text-xl">
+                <span className="text-sm sm:text-xl">
                   Total Payable
                 </span>
 
                 <span
-                  className="text-3xl text-[#B9572C]"
+                  className="text-xl sm:text-3xl text-[#B9572C]"
                   style={{ fontFamily: "'Prata', serif" }}
                 >
                   {currency}
@@ -533,10 +542,13 @@ const Payment = () => {
                 type="submit"
                 disabled={loading}
                 className="
-                  mt-8
+                  mt-5
+                  sm:mt-8
                   w-full
-                  h-16
-                  rounded-2xl
+                  h-12
+                  sm:h-16
+                  rounded-xl
+                  sm:rounded-2xl
                   bg-[#B9572C]
                   hover:bg-[#a44f27]
                   transition-all
@@ -546,8 +558,10 @@ const Payment = () => {
                   flex
                   items-center
                   justify-center
-                  gap-3
-                  text-lg
+                  gap-2
+                  sm:gap-3
+                  text-sm
+                  sm:text-lg
                   font-semibold
                   disabled:opacity-60
                   disabled:cursor-not-allowed
@@ -572,19 +586,19 @@ const Payment = () => {
 
               </button>
 
-              <div className="mt-10 space-y-5">
+              <div className="mt-6 sm:mt-10 space-y-3 sm:space-y-5">
 
-                <div className="flex items-center gap-3 text-gray-300">
+                <div className="flex items-center gap-3 text-gray-300 text-sm sm:text-base">
                   <FaLock className="text-[#B9572C]" />
                   SSL Encrypted Checkout
                 </div>
 
-                <div className="flex items-center gap-3 text-gray-300">
+                <div className="flex items-center gap-3 text-gray-300 text-sm sm:text-base">
                   <FaShieldAlt className="text-[#B9572C]" />
                   100% Secure Payment
                 </div>
 
-                <div className="flex items-center gap-3 text-gray-300">
+                <div className="flex items-center gap-3 text-gray-300 text-sm sm:text-base">
                   <FaCheckCircle className="text-[#B9572C]" />
                   Trusted Worldwide
                 </div>
