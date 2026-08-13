@@ -88,7 +88,10 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
 
-    const { email, password } = req.body;
+    let { email, password } = req.body;
+
+    email = email?.trim().toLowerCase();
+    password = password?.trim();
 
     if (!email || !password) {
       return res.status(400).json({
@@ -97,9 +100,7 @@ const loginUser = async (req, res) => {
       });
     }
 
-    const user = await User.findOne({
-      email: email.trim().toLowerCase(),
-    });
+    const user = await User.findOne({ email });
 
     if (!user) {
       return res.status(404).json({
@@ -150,11 +151,22 @@ const adminLogin = async (req, res) => {
 
   try {
 
-    const { email, password } = req.body;
+    let { email, password } = req.body;
+
+    // Mobile keyboards often auto-capitalize the first letter or add
+    // stray spaces, so we normalize both the incoming values and the
+    // expected env values before comparing.
+    email = email?.trim().toLowerCase();
+    password = password?.trim();
+
+    const expectedEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
+    const expectedPassword = process.env.ADMIN_PASSWORD?.trim();
 
     if (
-      email !== process.env.ADMIN_EMAIL ||
-      password !== process.env.ADMIN_PASSWORD
+      !email ||
+      !password ||
+      email !== expectedEmail ||
+      password !== expectedPassword
     ) {
       return res.status(401).json({
         success: false,
@@ -190,7 +202,6 @@ const adminLogin = async (req, res) => {
   }
 
 };
-// ================= Dashboard Data =================
 
 // ================= Dashboard Data =================
 
@@ -224,13 +235,11 @@ const dashboardData = async (req, res) => {
       monthlyRevenue[month] += order.amount;
     });
 
-    // Sales Overview By Category
-
     // ================= Products By Category =================
 
     const products = await Product.find({}, "category");
 
-        const categorySales = {
+    const categorySales = {
       Hoodies: 0,
       Watches: 0,
       Accessories: 0,
@@ -266,7 +275,7 @@ const dashboardData = async (req, res) => {
           ? 0
           : Math.round((categorySales[category] / totalSales) * 100),
       color: colors[category],
-    }));                                                                
+    }));
 
     // ================= Response =================
 
@@ -295,6 +304,7 @@ const dashboardData = async (req, res) => {
 
   }
 };
+
 export {
   registerUser,
   loginUser,

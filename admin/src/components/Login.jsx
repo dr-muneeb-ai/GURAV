@@ -14,8 +14,8 @@ const Login = ({ setToken }) => {
       const response = await axios.post(
         backendUrl + "/api/admin/login",
         {
-          email,
-          password,
+          email: email.trim(),
+          password: password.trim(),
         }
       );
 
@@ -58,6 +58,10 @@ const Login = ({ setToken }) => {
               placeholder="admin@gmail.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              autoCapitalize="none"
+              autoCorrect="off"
+              autoComplete="off"
+              spellCheck="false"
               className="w-full p-3 rounded-xl border border-gray-300 outline-none focus:border-[#B9572C]"
               required
             />
@@ -73,6 +77,10 @@ const Login = ({ setToken }) => {
               placeholder="********"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              autoCapitalize="none"
+              autoCorrect="off"
+              autoComplete="off"
+              spellCheck="false"
               className="w-full p-3 rounded-xl border border-gray-300 outline-none focus:border-[#B9572C]"
               required
             />
