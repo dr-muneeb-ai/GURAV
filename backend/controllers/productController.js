@@ -1,5 +1,6 @@
 import Product from "../models/Product.js";
 import Review from "../models/Review.js";
+import cloudinary from "../config/cloudinary.js";
 
 const attachRatings = async (products) => {
 
@@ -61,6 +62,21 @@ const attachRatings = async (products) => {
 
 };
 
+// ================= Helper: Upload buffer to Cloudinary =================
+
+const uploadToCloudinary = (fileBuffer) => {
+  return new Promise((resolve, reject) => {
+    const stream = cloudinary.uploader.upload_stream(
+      { folder: "gurav-products" },
+      (error, result) => {
+        if (error) reject(error);
+        else resolve(result.secure_url);
+      }
+    );
+    stream.end(fileBuffer);
+  });
+};
+
 // ================= Add Product =================
 
 const addProduct = async (req, res) => {
@@ -82,8 +98,8 @@ const addProduct = async (req, res) => {
       });
     }
 
-    const images = req.files.map(
-      (file) => `/uploads/${file.filename}`
+    const images = await Promise.all(
+      req.files.map((file) => uploadToCloudinary(file.buffer))
     );
 
     const product = await Product.create({
@@ -232,8 +248,8 @@ const updateProduct = async (req, res) => {
 
     // Update images only if new images are uploaded
     if (req.files && req.files.length > 0) {
-      product.image = req.files.map(
-        (file) => `/uploads/${file.filename}`
+      product.image = await Promise.all(
+        req.files.map((file) => uploadToCloudinary(file.buffer))
       );
     }
 
