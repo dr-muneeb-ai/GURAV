@@ -35,6 +35,13 @@ const Cart = () => {
     }
   }, [cartItems, products]);
 
+  const scrollToCheckout = () => {
+    const section = document.getElementById("checkout-section");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
     <div
       className="
@@ -43,9 +50,14 @@ const Cart = () => {
       from-[#121212]
       via-[#ece7e2]
       to-[#121212]
-      py-16
-      px-5
-      rounded-[40px]
+      py-8
+      sm:py-16
+      px-3
+      sm:px-5
+      pb-24
+      lg:pb-16
+      rounded-[24px]
+      sm:rounded-[40px]
     "
     >
       {/* ================= HERO ================= */}
@@ -54,33 +66,35 @@ const Cart = () => {
 
         <div
           className="
-          rounded-[40px]
+          rounded-[24px]
+          sm:rounded-[40px]
           overflow-hidden
           bg-gradient-to-r
           from-[#1d1d1b]
           via-[#262626]
           to-[#111]
-          p-10
+          p-5
+          sm:p-10
           lg:p-14
           shadow-[0_35px_90px_rgba(0,0,0,0.45)]
         "
         >
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-10">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-10">
 
             <div>
 
-              <p className="uppercase tracking-[8px] text-[#b9572c] text-sm">
+              <p className="uppercase tracking-[4px] sm:tracking-[8px] text-[#b9572c] text-[10px] sm:text-sm">
                 Premium Shopping Cart
               </p>
 
               <h1
-                className="text-5xl lg:text-7xl text-white mt-4"
+                className="text-3xl sm:text-5xl lg:text-7xl text-white mt-2 sm:mt-4"
                 style={{ fontFamily: "'Prata', serif" }}
               >
                 Your Cart
               </h1>
 
-              <p className="text-gray-300 mt-6 max-w-xl leading-8"
+              <p className="text-gray-300 mt-3 sm:mt-6 max-w-xl leading-6 sm:leading-8 text-sm sm:text-base"
               style={{ fontFamily: "'Prata', serif" }}>
                 Review your selected products before checkout.
                 Premium quality. Secure payment. Fast delivery.
@@ -92,20 +106,23 @@ const Cart = () => {
               className="
               bg-white/10
               backdrop-blur-xl
-              rounded-3xl
-              p-8
+              rounded-2xl
+              sm:rounded-3xl
+              p-4
+              sm:p-8
               border
               border-white/20
-              min-w-[260px]
+              min-w-[140px]
+              sm:min-w-[260px]
             "
             >
 
-              <p className="text-white text-lg">
+              <p className="text-white text-sm sm:text-lg">
                 Cart Items
               </p>
 
               <h2
-                className="text-6xl text-[#b9572c] mt-3"
+                className="text-3xl sm:text-6xl text-[#b9572c] mt-1 sm:mt-3"
                 style={{ fontFamily: "'Prata', serif" }}
               >
                 {cartData.length}
@@ -118,7 +135,7 @@ const Cart = () => {
 
         {/* ================= CART ITEMS ================= */}
 
-        <div className="mt-14 space-y-8">
+        <div className="mt-8 sm:mt-14 space-y-4 sm:space-y-8">
 
           {cartData.length > 0 ? (
 
@@ -138,14 +155,16 @@ const Cart = () => {
                   bg-gradient-to-br
                   from-[#23201D]
                   to-[#f4f4f4]
-                  rounded-[34px]
+                  rounded-[20px]
+                  sm:rounded-[34px]
                   border
                   border-white
                   shadow-[0_25px_70px_rgba(0,0,0,0.12)]
                   hover:shadow-[0_35px_90px_rgba(185,87,44,0.18)]
                   transition-all
                   duration-500
-                  p-7
+                  p-4
+                  sm:p-7
                 "
                 >
 
@@ -153,7 +172,8 @@ const Cart = () => {
                     className="
                     grid
                     lg:grid-cols-[180px_1fr_auto]
-                    gap-8
+                    gap-4
+                    sm:gap-8
                     items-center
                   "
                   >
@@ -164,10 +184,13 @@ const Cart = () => {
                       src={backendUrl + productData.image[0]}
                       alt={productData.name}
                       className="
-                      w-40
-                      h-40
+                      w-24
+                      h-24
+                      sm:w-40
+                      sm:h-40
                       object-cover
-                      rounded-3xl
+                      rounded-2xl
+                      sm:rounded-3xl
                       border
                       border-gray-200
                       shadow-lg
@@ -179,26 +202,29 @@ const Cart = () => {
                     <div>
 
                       <h2
-                        className="text-3xl text-[#1d1d1b]"
+                        className="text-xl sm:text-3xl text-[#1d1d1b]"
                         style={{ fontFamily: "'Prata', serif" }}
                       >
                         {productData.name}
                       </h2>
 
-                      <p className="mt-4 text-gray-500 leading-7">
+                      <p className="mt-2 sm:mt-4 text-gray-500 leading-6 sm:leading-7 text-sm sm:text-base">
                         {productData.description}
                       </p>
 
-                      <div className="flex flex-wrap gap-4 mt-6">
+                      <div className="flex flex-wrap gap-2 sm:gap-4 mt-3 sm:mt-6">
 
                         <span
                           className="
-                          px-5
-                          py-2
+                          px-3
+                          sm:px-5
+                          py-1.5
+                          sm:py-2
                           rounded-full
                           bg-[#b9572c]
                           text-white
-                          text-sm
+                          text-xs
+                          sm:text-sm
                           font-semibold
                         "
                         >
@@ -207,12 +233,15 @@ const Cart = () => {
 
                         <span
                           className="
-                          px-5
-                          py-2
+                          px-3
+                          sm:px-5
+                          py-1.5
+                          sm:py-2
                           rounded-full
                           bg-[#121212]
                           text-white
-                          text-sm
+                          text-xs
+                          sm:text-sm
                         "
                         >
                           {currency}
@@ -223,12 +252,12 @@ const Cart = () => {
                     </div>
                                         {/* RIGHT SIDE */}
 
-                    <div className="flex flex-col items-end gap-6">
+                    <div className="flex flex-col items-end gap-3 sm:gap-6">
 
                       {/* PRICE */}
 
                       <h2
-                        className="text-4xl text-[#b9572c]"
+                        className="text-2xl sm:text-4xl text-[#b9572c]"
                         style={{ fontFamily: "'Prata', serif" }}
                       >
                         {currency}
@@ -259,8 +288,10 @@ const Cart = () => {
                             )
                           }
                           className="
-                          px-5
-                          py-3
+                          px-3
+                          sm:px-5
+                          py-2
+                          sm:py-3
                           hover:bg-[#b9572c]
                           hover:text-white
                           transition
@@ -271,9 +302,12 @@ const Cart = () => {
 
                         <span
                           className="
-                          w-14
+                          w-10
+                          sm:w-14
                           text-center
                           font-semibold
+                          text-sm
+                          sm:text-base
                         "
                         >
                           {item.quantity}
@@ -288,8 +322,10 @@ const Cart = () => {
                             )
                           }
                           className="
-                          px-5
-                          py-3
+                          px-3
+                          sm:px-5
+                          py-2
+                          sm:py-3
                           hover:bg-[#b9572c]
                           hover:text-white
                           transition
@@ -317,12 +353,14 @@ const Cart = () => {
                         text-red-500
                         hover:text-red-700
                         transition
+                        text-sm
+                        sm:text-base
                       "
                       >
                         <img
                           src={assets.bin_icon}
                           alt=""
-                          className="w-5"
+                          className="w-4 sm:w-5"
                         />
 
                         Remove
@@ -342,39 +380,46 @@ const Cart = () => {
 
             <div
               className="
-              rounded-[40px]
+              rounded-[24px]
+              sm:rounded-[40px]
               bg-white
               shadow-xl
-              p-20
+              p-8
+              sm:p-20
               text-center
             "
             >
 
               <img
                 src={assets.cart_icon}
-                className="w-24 mx-auto opacity-50"
+                className="w-14 sm:w-24 mx-auto opacity-50"
                 alt=""
               />
 
               <h2
-                className="text-4xl mt-8"
+                className="text-2xl sm:text-4xl mt-4 sm:mt-8"
                 style={{ fontFamily: "'Prata', serif" }}
               >
                 Your Cart is Empty
               </h2>
 
-              <p className="mt-5 text-gray-500">
+              <p className="mt-2 sm:mt-5 text-gray-500 text-sm sm:text-base">
                 Add some beautiful products to continue shopping.
               </p>
 
               <button
                 onClick={() => navigate("/collection")}
                 className="
-                mt-8
+                mt-4
+                sm:mt-8
                 bg-[#b9572c]
                 text-white
-                px-8
-                py-3
+                px-6
+                sm:px-8
+                py-2.5
+                sm:py-3
+                text-sm
+                sm:text-base
                 rounded-full
                 hover:scale-105
                 transition
@@ -390,69 +435,71 @@ const Cart = () => {
         </div>
                 {/* ================= CHECKOUT SECTION ================= */}
 
-        <div className="mt-20 grid lg:grid-cols-[1.4fr_420px] gap-10">
+        <div id="checkout-section" className="mt-10 sm:mt-20 grid lg:grid-cols-[1.4fr_420px] gap-6 sm:gap-10 scroll-mt-6">
 
           {/* LEFT CARD */}
 
           <div
             className="
-            rounded-[40px]
+            rounded-[24px]
+            sm:rounded-[40px]
             bg-gradient-to-br
             from-[#1d1d1b]
             via-[#252525]
             to-[#111]
-            p-10
+            p-5
+            sm:p-10
             shadow-[0_35px_90px_rgba(0,0,0,0.45)]
           "
           >
 
             <h2
-              className="text-4xl text-white"
+              className="text-2xl sm:text-4xl text-white"
               style={{ fontFamily: "'Prata', serif" }}
             >
               Why Shop With Us?
             </h2>
 
-            <div className="grid sm:grid-cols-2 gap-6 mt-10">
+            <div className="grid sm:grid-cols-2 gap-3 sm:gap-6 mt-5 sm:mt-10">
 
-              <div className="bg-white/10 rounded-3xl p-6 border border-white/10">
-                <h3 className="text-[#b9572c] text-xl font-semibold">
+              <div className="bg-white/10 rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-white/10">
+                <h3 className="text-[#b9572c] text-base sm:text-xl font-semibold">
                   Premium Quality
                 </h3>
 
-                <p className="text-gray-300 mt-3 leading-7">
+                <p className="text-gray-300 mt-1.5 sm:mt-3 leading-5 sm:leading-7 text-xs sm:text-base">
                   Carefully crafted handmade products made with premium
                   materials.
                 </p>
               </div>
 
-              <div className="bg-white/10 rounded-3xl p-6 border border-white/10">
-                <h3 className="text-[#b9572c] text-xl font-semibold">
+              <div className="bg-white/10 rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-white/10">
+                <h3 className="text-[#b9572c] text-base sm:text-xl font-semibold">
                   Secure Payments
                 </h3>
 
-                <p className="text-gray-300 mt-3 leading-7">
+                <p className="text-gray-300 mt-1.5 sm:mt-3 leading-5 sm:leading-7 text-xs sm:text-base">
                   Safe and encrypted checkout experience with trusted payment
                   methods.
                 </p>
               </div>
 
-              <div className="bg-white/10 rounded-3xl p-6 border border-white/10">
-                <h3 className="text-[#b9572c] text-xl font-semibold">
+              <div className="bg-white/10 rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-white/10">
+                <h3 className="text-[#b9572c] text-base sm:text-xl font-semibold">
                   Fast Shipping
                 </h3>
 
-                <p className="text-gray-300 mt-3 leading-7">
+                <p className="text-gray-300 mt-1.5 sm:mt-3 leading-5 sm:leading-7 text-xs sm:text-base">
                   Quick dispatch and reliable delivery to your doorstep.
                 </p>
               </div>
 
-              <div className="bg-white/10 rounded-3xl p-6 border border-white/10">
-                <h3 className="text-[#b9572c] text-xl font-semibold">
+              <div className="bg-white/10 rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-white/10">
+                <h3 className="text-[#b9572c] text-base sm:text-xl font-semibold">
                   Easy Returns
                 </h3>
 
-                <p className="text-gray-300 mt-3 leading-7">
+                <p className="text-gray-300 mt-1.5 sm:mt-3 leading-5 sm:leading-7 text-xs sm:text-base">
                   Hassle-free return policy with customer-first support.
                 </p>
               </div>
@@ -465,10 +512,12 @@ const Cart = () => {
 
           <div
             className="
-            rounded-[40px]
+            rounded-[24px]
+            sm:rounded-[40px]
             bg-[#23201D]
             backdrop-blur-xl
-            p-8
+            p-4
+            sm:p-8
             shadow-[0_25px_70px_rgba(0,0,0,0.12)]
           "
           >
@@ -478,13 +527,16 @@ const Cart = () => {
             <button
               onClick={() => navigate("/place-order")}
               className="
-              mt-8
+              mt-4
+              sm:mt-8
               w-full
-              py-4
+              py-3
+              sm:py-4
               rounded-full
               bg-[#b9572c]
               text-white
-              text-lg
+              text-sm
+              sm:text-lg
               font-semibold
               hover:bg-[#a74d25]
               hover:scale-[1.02]
@@ -496,7 +548,7 @@ const Cart = () => {
               Proceed To Checkout →
             </button>
 
-            <p className="text-center text-gray-500 mt-6 text-sm">
+            <p className="text-center text-gray-500 mt-3 sm:mt-6 text-[10px] sm:text-sm">
               Secure SSL Encrypted Checkout
             </p>
 
@@ -504,6 +556,44 @@ const Cart = () => {
 
         </div>
 
+      </div>
+
+      {/* ================= MOBILE STICKY CHECKOUT BAR ================= */}
+      <div
+        className="
+        lg:hidden
+        fixed
+        bottom-0
+        left-0
+        w-full
+        z-50
+        bg-[#1d1d1b]/95
+        backdrop-blur-md
+        border-t
+        border-white/10
+        px-4
+        py-3
+        shadow-[0_-10px_30px_rgba(0,0,0,0.35)]
+      "
+      >
+        <button
+          onClick={scrollToCheckout}
+          className="
+          w-full
+          py-3
+          rounded-full
+          bg-[#b9572c]
+          text-white
+          text-sm
+          font-semibold
+          hover:bg-[#a74d25]
+          active:scale-[0.98]
+          transition-all
+          duration-300
+        "
+        >
+          Proceed To Checkout →
+        </button>
       </div>
 
     </div>
