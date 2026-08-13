@@ -34,7 +34,7 @@ const App = () => {
     const sendVisitor = async () => {
       try {
         await axios.post(
-          "http://localhost:4000/api/visitor/track",
+          "https://gurav-1.onrender.com/api/visitor/track",
           {
             sessionId,
           }

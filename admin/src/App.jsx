@@ -14,7 +14,7 @@ import Settings from "./pages/Settings";
 import List from "./pages/List";
 import Edit from "./pages/Edit";
 import Stats from "./pages/Stats";
-export const backendUrl = "http://localhost:4000";
+export const backendUrl = "https://gurav-1.onrender.com";
 export const currency = "A$.";
 
 const Dashboard = () => {
