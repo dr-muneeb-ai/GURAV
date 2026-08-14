@@ -180,12 +180,13 @@ const handleBuyNow = async () => {
     return <div className="opacity-0"></div>;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#121212] via-[#ece7e2] to-[#121212] py-16 rounded-3xl  overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#121212] via-[#ece7e2] to-[#121212] py-8 sm:py-16 rounded-2xl sm:rounded-3xl overflow-hidden">
       <div
 	  className="
 	    max-w-[1500px]
 	    mx-auto
-	    px-5
+	    px-3
+	    sm:px-5
 	    lg:px-10
 	    
 	    
@@ -194,31 +195,36 @@ const handleBuyNow = async () => {
         <div
 	  className="
 	  
-	    p-8
+	    p-4
+	    sm:p-8
 	    lg:p-12
 	    flex
 	    flex-col
 	    lg:flex-row
-	    gap-16
+	    gap-6
+	    sm:gap-16
 
 	    
 	  "
 	>
           {/* LEFT SIDE */}
           <div className="
-            rounded-[40px]
+            rounded-[24px]
+            sm:rounded-[40px]
   overflow-hidden
             w-full
             lg:w-[46%]
             flex
             flex-col
-            gap-4
+            gap-3
+            sm:gap-4
           ">
             {/* MAIN IMAGE */}
             <div
               className="
                 aspect-square
-                rounded-3xl
+                rounded-2xl
+                sm:rounded-3xl
                 overflow-hidden
                 bg-grey
                 border
@@ -250,7 +256,8 @@ const handleBuyNow = async () => {
             {/* THUMBNAILS */}
             <div className="
               flex
-              gap-4
+              gap-2
+              sm:gap-4
               overflow-x-auto
             ">
               {productData.image.map((item, index) => (
@@ -262,10 +269,13 @@ const handleBuyNow = async () => {
                   loading="lazy"
                   decoding="async"
                   className={`
-                    w-24
-                    h-20
+                    w-16
+                    h-14
+                    sm:w-24
+                    sm:h-20
                     shrink-0
-                    rounded-2xl
+                    rounded-xl
+                    sm:rounded-2xl
                     object-cover
                     cursor-pointer
                     border-2
@@ -294,7 +304,8 @@ const handleBuyNow = async () => {
             <div>
               <h1
                 className="
-                  text-5xl
+                  text-3xl
+                  sm:text-5xl
 		lg:text-6xl
 		leading-tight
 		tracking-wide
@@ -309,23 +320,24 @@ const handleBuyNow = async () => {
               </h1>
 
               {/* RATING */}
-              <div className="flex items-center gap-2 mt-4">
+              <div className="flex items-center gap-2 mt-3 sm:mt-4">
                 <div className="flex">
                   {renderStars(ratingAverage)}
                 </div>
 
                 <button
                   onClick={() => setShowReviews(true)}
-                  className="text-gray-500 hover:text-[#b9572c] transition"
+                  className="text-gray-500 hover:text-[#b9572c] transition text-xs sm:text-base"
                 >
                   {reviewsCount} Customer Reviews
                 </button>
               </div>
 
               {/* PRICE */}
-              <div className="mt-5">
+              <div className="mt-4 sm:mt-5">
                 <p className="
-                  text-xl
+                  text-base
+                  sm:text-xl
                   text-gray-400
                   line-through
                 ">
@@ -334,7 +346,8 @@ const handleBuyNow = async () => {
                 </p>
 
                 <h2 className="
-                  text-4xl
+                  text-2xl
+                  sm:text-4xl
                   font-bold
                   text-[#1d1d1b]
                 ">
@@ -344,13 +357,16 @@ const handleBuyNow = async () => {
 
                 <span className="
                   inline-block
-                  mt-3
+                  mt-2
+                  sm:mt-3
                   bg-[#b9572c]
                   text-white
-                  px-4
+                  px-3
+                  sm:px-4
                   py-1
                   rounded-full
-                  text-sm
+                  text-xs
+                  sm:text-sm
                 ">
                   Save 20%
                 </span>
@@ -358,18 +374,25 @@ const handleBuyNow = async () => {
 
               {/* DESCRIPTION */}
               <p className="
-                mt-5
+                mt-4
+                sm:mt-5
                 text-gray-600
-                leading-7
+                leading-6
+                sm:leading-7
+                text-sm
+                sm:text-base
               ">
                 {productData.description}
               </p>
 
               {/* SIZE */}
-              <div className="mt-6">
+              <div className="mt-5 sm:mt-6">
                 <p className="
                   font-medium
-                  mb-3
+                  mb-2
+                  sm:mb-3
+                  text-sm
+                  sm:text-base
                 ">
                   Select Size
                 </p>
@@ -377,15 +400,20 @@ const handleBuyNow = async () => {
                 <div className="
                   flex
                   flex-wrap
-                  gap-3
+                  gap-2
+                  sm:gap-3
                 ">
                   {productData.sizes.map((item, index) => (
                     <button
                       key={index}
                       onClick={() => setSize(item)}
                       className={`
-                        px-5
-                        py-2
+                        px-4
+                        sm:px-5
+                        py-1.5
+                        sm:py-2
+                        text-sm
+                        sm:text-base
                         rounded-xl
                         border
                         transition-colors
@@ -404,10 +432,13 @@ const handleBuyNow = async () => {
               </div>
 
               {/* QUANTITY */}
-              <div className="mt-6">
+              <div className="mt-5 sm:mt-6">
                 <p className="
                   font-medium
-                  mb-3
+                  mb-2
+                  sm:mb-3
+                  text-sm
+                  sm:text-base
                 ">
                   Quantity
                 </p>
@@ -426,8 +457,10 @@ const handleBuyNow = async () => {
                       quantity > 1 && setQuantity(quantity - 1)
                     }
                     className="
-                      px-5
-                      py-3
+                      px-4
+                      sm:px-5
+                      py-2
+                      sm:py-3
                       hover:bg-[#b9572c]
                       hover:text-white
                       transition
@@ -437,8 +470,11 @@ const handleBuyNow = async () => {
                   </button>
 
                   <span className="
-                    px-6
+                    px-5
+                    sm:px-6
                     font-semibold
+                    text-sm
+                    sm:text-base
                   ">
                     {quantity}
                   </span>
@@ -446,8 +482,10 @@ const handleBuyNow = async () => {
                   <button
                     onClick={() => setQuantity(quantity + 1)}
                     className="
-                      px-5
-                      py-3
+                      px-4
+                      sm:px-5
+                      py-2
+                      sm:py-3
                       hover:bg-[#b9572c]
                       hover:text-white
                       transition
@@ -462,26 +500,33 @@ const handleBuyNow = async () => {
             {/* BUTTONS */}
             <div className="
               flex
-              flex-col
-              sm:flex-row
-              gap-6
-              mt-8
+              flex-row
+              gap-3
+              sm:gap-6
+              mt-6
+              sm:mt-8
             ">
               <button
                 onClick={() => addToCart(productData._id, size)}
                 className="
-                  w-44
+                  flex-1
+                  sm:w-44
+                  sm:flex-none
                   bg-[#1d1d1b]
                   hover:bg-[#b9572c]
                   text-white
-                  px-6
-                  py-3
+                  px-3
+                  sm:px-6
+                  py-2.5
+                  sm:py-3
                   rounded-full
-                  text-sm
+                  text-xs
+                  sm:text-sm
                   font-medium
                   transition-colors
                   duration-300
                   hover:scale-105
+                  whitespace-nowrap
                 "
               >
                 ADD TO CART
@@ -490,21 +535,27 @@ const handleBuyNow = async () => {
               <button
 		  onClick={handleBuyNow}
 		  className="
-		    w-44
+		    flex-1
+		    sm:w-44
+		    sm:flex-none
 		    border-2
 		    border-[#1d1d1b]
 		    hover:border-[#b9572c]
 		    hover:bg-[#b9572c]
 		    hover:text-white
 		    text-[#1d1d1b]
-		    px-6
-		    py-3
+		    px-3
+		    sm:px-6
+		    py-2.5
+		    sm:py-3
 		    rounded-full
-		    text-sm
+		    text-xs
+		    sm:text-sm
 		    font-medium
 		    transition-colors
 		    duration-300
 		    hover:scale-105
+		    whitespace-nowrap
 		  "
 		>
 		  BUY NOW
@@ -516,19 +567,23 @@ const handleBuyNow = async () => {
         {/* TRUST BOX */}
         <div
   className="
-    mt-10
+    mt-6
+    sm:mt-10
     rounded-2xl
     border
     border-transparent
     bg-gradient-to-br
     from-[#708090]
     to-gray-100
-    p-6
+    p-4
+    sm:p-6
     grid
     grid-cols-2
     sm:grid-cols-4
-    gap-4
-    text-lg
+    gap-3
+    sm:gap-4
+    text-xs
+    sm:text-lg
     text-[#b9572c]
     font-black
     font-['Prata']
@@ -541,7 +596,7 @@ const handleBuyNow = async () => {
 </div>
 
         {/* PRODUCT DETAILS */}
-        <div className="mt-20">
+        <div className="mt-10 sm:mt-20">
           <div className="
             inline-block
             border-b-2
@@ -549,8 +604,10 @@ const handleBuyNow = async () => {
           ">
             <h2
               className="
-                text-3xl
-                pb-3
+                text-xl
+                sm:text-3xl
+                pb-2
+                sm:pb-3
               "
               style={{
                 fontFamily: "'Prata', serif",
@@ -561,20 +618,25 @@ const handleBuyNow = async () => {
           </div>
 
           <div className="
-            mt-8
+            mt-5
+            sm:mt-8
             bg-transparent
-            rounded-[32px]
+            rounded-[22px]
+            sm:rounded-[32px]
 shadow-[0_30px_80px_rgba(0,0,0,0.10)]
 border
 border-transparent
 bg-gradient-to-br
 from-[#708090]
 to-gray-100
-            p-8
+            p-4
+            sm:p-8
             text-black
             font-Calibiri
-            leading-8
-            text-lg
+            leading-6
+            sm:leading-8
+            text-sm
+            sm:text-lg
           "
           style= {{fontFamily: "'Prata,Serif"}}>
             <p>
@@ -592,19 +654,26 @@ to-gray-100
               premium craftsmanship and attention to detail.
             </p>
 
-            <div className="mt-8">
+            <div className="mt-5 sm:mt-8">
               <h3 className="
                 font-semibold
                 text-black
-                mb-3
+                mb-2
+                sm:mb-3
+                text-sm
+                sm:text-base
               ">
                 Specifications
               </h3>
 
               <ul className="
                 list-disc
-                pl-6
-                space-y-2
+                pl-5
+                sm:pl-6
+                space-y-1.5
+                sm:space-y-2
+                text-sm
+                sm:text-base
               ">
                 <li>Hand-made embellished design</li>
                 <li>Comfortable & lightweight</li>
@@ -636,17 +705,19 @@ to-gray-100
               sm:w-[420px]
               bg-white
               shadow-2xl
-              p-8
+              p-5
+              sm:p-8
               overflow-y-auto
             ">
               <div className="
                 flex
                 justify-between
                 items-center
-                mb-8
+                mb-5
+                sm:mb-8
               ">
                 <h2
-                  className="text-3xl"
+                  className="text-2xl sm:text-3xl"
                   style={{
                     fontFamily: "'Prata', serif",
                   }}
@@ -656,7 +727,7 @@ to-gray-100
 
                 <button
                   onClick={() => setShowReviews(false)}
-                  className="text-2xl"
+                  className="text-xl sm:text-2xl"
                 >
                   ✕
                 </button>
@@ -664,29 +735,29 @@ to-gray-100
 
               <div>
                 {/* Average Rating */}
-                <div className="mb-8 border-b pb-6">
-                  <h3 className="text-xl font-semibold">
+                <div className="mb-6 sm:mb-8 border-b pb-4 sm:pb-6">
+                  <h3 className="text-lg sm:text-xl font-semibold">
                     {ratingAverage.toFixed(1)} ★
                   </h3>
-                  <p className="text-gray-500">
+                  <p className="text-gray-500 text-sm sm:text-base">
                     {reviewsCount} Reviews
                   </p>
                 </div>
 
                 {/* Add Review */}
                 {token ? (
-                  <div className="mb-8">
-                    <h3 className="font-semibold mb-3">
+                  <div className="mb-6 sm:mb-8">
+                    <h3 className="font-semibold mb-2 sm:mb-3 text-sm sm:text-base">
                       Write a Review
                     </h3>
 
                     {/* Stars */}
-                    <div className="flex gap-2 mb-4">
+                    <div className="flex gap-2 mb-3 sm:mb-4">
                       {[1, 2, 3, 4, 5].map((star) => (
                         <button
                           key={star}
                           onClick={() => setReviewRating(star)}
-                          className={`text-2xl transition
+                          className={`text-xl sm:text-2xl transition
                             ${
                               star <= reviewRating
                                 ? "text-yellow-500"
@@ -704,7 +775,7 @@ to-gray-100
                       onChange={(e) => setReviewComment(e.target.value)}
                       rows={4}
                       placeholder="Share your experience..."
-                      className="w-full border rounded-xl p-3 resize-none"
+                      className="w-full border rounded-xl p-3 resize-none text-sm sm:text-base"
                     />
 
                     <button
@@ -713,7 +784,7 @@ to-gray-100
                         submittingReview ||
                         reviews.some((r) => r.userId?._id === user?._id)
                       }
-                      className="mt-4 bg-[#b9572c] text-white px-6 py-3 rounded-full disabled:opacity-50"
+                      className="mt-3 sm:mt-4 bg-[#b9572c] text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-full disabled:opacity-50 text-sm sm:text-base"
                     >
                       {reviews.some((r) => r.userId?._id === user?._id)
                         ? "Already Reviewed"
@@ -723,8 +794,8 @@ to-gray-100
                     </button>
                   </div>
                 ) : (
-                  <div className="mb-8 bg-gray-100 rounded-xl p-4 text-center">
-                    <p className="text-gray-600">
+                  <div className="mb-6 sm:mb-8 bg-gray-100 rounded-xl p-4 text-center">
+                    <p className="text-gray-600 text-sm sm:text-base">
                       Login to write a review.
                     </p>
                   </div>
@@ -732,15 +803,15 @@ to-gray-100
 
                 {/* Reviews */}
                 {loadingReviews ? (
-                  <p>Loading Reviews...</p>
+                  <p className="text-sm sm:text-base">Loading Reviews...</p>
                 ) : reviews.length === 0 ? (
-                  <p className="text-gray-500">No reviews yet.</p>
+                  <p className="text-gray-500 text-sm sm:text-base">No reviews yet.</p>
                 ) : (
-                  <div className="space-y-6">
+                  <div className="space-y-5 sm:space-y-6">
                     {reviews.map((review) => (
-                      <div key={review._id} className="border-b pb-5">
+                      <div key={review._id} className="border-b pb-4 sm:pb-5">
                         <div className="flex items-center gap-2">
-                          <h3 className="font-semibold">
+                          <h3 className="font-semibold text-sm sm:text-base">
                             {review.userId?.name}
                           </h3>
 
@@ -751,12 +822,12 @@ to-gray-100
                           )}
                         </div>
 
-                        <div className="text-yellow-500 text-lg">
+                        <div className="text-yellow-500 text-base sm:text-lg">
                           {"★".repeat(review.rating)}
                           {"☆".repeat(5 - review.rating)}
                         </div>
 
-                        <p className="text-gray-600 mt-2">
+                        <p className="text-gray-600 mt-2 text-sm sm:text-base">
                           {review.comment}
                         </p>
 
