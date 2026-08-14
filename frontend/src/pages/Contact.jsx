@@ -29,7 +29,7 @@ const Contact = () => {
           </p>
 
           <div className='flex gap-4 mt-2'>
-            <a href="https://instagram.com/dripdistrict" target="_blank" rel="noreferrer" className='text-sm border px-4 py-2 rounded-full hover:bg-black hover:text-white transition-all duration-300'>Instagram</a>
+            <a href="https://www.instagram.com/dripdistrictaus?igsh=MXI2ZDRwZHl0ems3Zg==" target="_blank" rel="noreferrer" className='text-sm border px-4 py-2 rounded-full hover:bg-black hover:text-white transition-all duration-300'>Instagram</a>
             <a href="https://tiktok.com/@dripdistrict" target="_blank" rel="noreferrer" className='text-sm border px-4 py-2 rounded-full hover:bg-black hover:text-white transition-all duration-300'>TikTok</a>
             <a href="https://facebook.com/dripdistrict" target="_blank" rel="noreferrer" className='text-sm border px-4 py-2 rounded-full hover:bg-black hover:text-white transition-all duration-300'>Facebook</a>
           </div>
