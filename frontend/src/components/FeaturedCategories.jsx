@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+
 const categories = [
   {
     title: "Watches",
@@ -26,8 +27,10 @@ const categories = [
     image: "/accessories.png",
   },
 ];
+
 const FeaturedCategories = () => {
   const navigate = useNavigate();
+
   return (
     <section className="py-14 px-2 lg:px-8">
       <style>{`
@@ -45,6 +48,7 @@ const FeaturedCategories = () => {
           animation: glowPulse 2.5s ease-in-out infinite;
         }
       `}</style>
+
       <div className="text-center mb-10 sm:mb-14">
         <h2
           className="text-4xl sm:text-5xl mt-4 font-extrabold"
@@ -53,6 +57,7 @@ const FeaturedCategories = () => {
           Open Your Closet
         </h2>
       </div>
+
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-6 max-w-[1400px] mx-auto">
         {categories.map((item) => (
           <div
@@ -85,14 +90,12 @@ const FeaturedCategories = () => {
 
             {/* Button */}
 	<button
-	  className="absolute left-3 right-3 sm:left-8 sm:right-8 bottom-[10%] sm:bottom-8 glow-btn px-2.5 py-1.5 sm:px-5 sm:py-2 rounded-full border border-[#D3D3D3] bg-black/30 text-white text-[8.5px] sm:text-xs tracking-widest hover:bg-[#D3D3D3] hover:text-black transition-colors duration-300"
+	  className="absolute left-3 right-3 sm:left-8 sm:right-8 bottom-[10%] sm:bottom-8 glow-btn px-2 py-1.5 sm:px-5 sm:py-2 rounded-full border border-[#D3D3D3] bg-black/30 text-white text-[8px] sm:text-xs tracking-widest hover:bg-[#D3D3D3] hover:text-black transition-colors duration-300 text-center"
 	  style={{
 	    fontFamily: "'Georgia', serif",
 	    whiteSpace: "nowrap",
 	    overflow: "hidden",
 	    textOverflow: "ellipsis",
-	    width: "fit-content",
-	    maxWidth: "100%",
 	  }}
 	>
 	  {item.buttonText}
@@ -103,4 +106,5 @@ const FeaturedCategories = () => {
     </section>
   );
 };
+
 export default FeaturedCategories;
