@@ -194,6 +194,7 @@ const Add = ({ token }) => {
 
       {/* Sizes */}
       {/* Sizes */}
+	{/* Sizes */}
 	<div>
 	  <p className="mb-2 font-semibold">Sizes</p>
 	  <div className="flex flex-wrap gap-3">
@@ -211,7 +212,7 @@ const Add = ({ token }) => {
 		className={`px-4 py-2 rounded-md transition ${
 		  sizes.includes(size)
 		    ? "bg-blue-600 text-white"
-		    : "bg-gray-100 hover:bg-gray-200"
+		    : "bg-transparent text-gray-600 hover:text-gray-900"
 		}`}
 	      >
 		{size}
