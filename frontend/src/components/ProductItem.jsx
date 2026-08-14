@@ -46,7 +46,7 @@ const ProductItem = ({
         </div>
 
         {/* DETAILS */}
-        <div className="p-2 sm:p-3 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-2.5 gap-y-5 sm:gap-4 lg:gap-6">
+        <div className="p-2 sm:p-3 sm:gap-4 lg:gap-6">
           <p className="uppercase text-[10px] tracking-[2px] text-gray-400">
             Premium Collection
           </p>
