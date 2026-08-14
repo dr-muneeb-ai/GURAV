@@ -5,25 +5,25 @@ const categories = [
   {
     title: "Watches",
     tagline: "Luxury, durable watches",
-    buttonText: "Select your Watch →",
+    buttonText: "Select your Watch",
     image: "/watch.jpeg",
   },
   {
     title: "Sneakers",
     tagline: "Sneakers & lifestyle",
-    buttonText: "Select your Sneakers →",
+    buttonText: "Select your Sneakers",
     image: "/sneaker.png",
   },
   {
     title: "Hoodies",
     tagline: "Cotton, & Street hoodies",
-    buttonText: "Select your Hoodie →",
+    buttonText: "Select your Hoodie",
     image: "/hoodie.png",
   },
   {
     title: "Accessories",
     tagline: "Wallets, belts & leather",
-    buttonText: "Select your Accessories →",
+    buttonText: "Select your Accessories",
     image: "/accessories.png",
   },
 ];
