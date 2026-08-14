@@ -496,7 +496,6 @@ const Order = ({ token }) => {
                         className="
                         w-full
 			  rounded-xl
-			  bg-white/70
 			  border
 			  border-[#B9572C]/20
 			  px-4
