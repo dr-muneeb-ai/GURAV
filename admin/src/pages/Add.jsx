@@ -197,7 +197,7 @@ const Add = ({ token }) => {
         <p className="mb-2 font-semibold">Sizes</p>
 
         <div className="flex flex-wrap gap-3">
-          {["S", "M", "L", "XL", "XXL", "Standard",].map((size) => (
+          {["S", "M", "L", "XL", "Standard",].map((size) => (
             <button
               key={size}
               type="button"
