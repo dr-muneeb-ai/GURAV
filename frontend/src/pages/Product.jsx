@@ -188,8 +188,6 @@ const handleBuyNow = async () => {
 	    px-3
 	    sm:px-5
 	    lg:px-10
-	    
-	    
 	  "
 	>
         <div
@@ -211,7 +209,6 @@ const handleBuyNow = async () => {
           <div className="
             rounded-[24px]
             sm:rounded-[40px]
-  overflow-hidden
             w-full
             lg:w-[46%]
             flex
