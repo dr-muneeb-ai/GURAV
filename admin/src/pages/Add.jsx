@@ -193,44 +193,43 @@ const Add = ({ token }) => {
       </div>
 
       {/* Sizes */}
-      <div>
-        <p className="mb-2 font-semibold">Sizes</p>
+      {/* Sizes */}
+	<div>
+	  <p className="mb-2 font-semibold">Sizes</p>
+	  <div className="flex flex-wrap gap-3">
+	    {["S", "M", "L", "XL", "Standard"].map((size) => (
+	      <button
+		key={size}
+		type="button"
+		onClick={() =>
+		  setSizes((prev) =>
+		    prev.includes(size)
+		      ? prev.filter((item) => item !== size)
+		      : [...prev, size]
+		  )
+		}
+		className={`px-4 py-2 rounded-md transition ${
+		  sizes.includes(size)
+		    ? "bg-blue-600 text-white"
+		    : "bg-gray-100 hover:bg-gray-200"
+		}`}
+	      >
+		{size}
+	      </button>
+	    ))}
+	  </div>
+	</div>
 
-        <div className="flex flex-wrap gap-3">
-          {["S", "M", "L", "XL", "Standard",].map((size) => (
-            <button
-              key={size}
-              type="button"
-              onClick={() =>
-                setSizes((prev) =>
-                  prev.includes(size)
-                    ? prev.filter((item) => item !== size)
-                    : [...prev, size]
-                )
-              }
-              className={`px-4 py-2 rounded-md border transition ${
-                sizes.includes(size)
-                  ? "bg-blue-600 text-white border-blue-600"
-                  : "bg-gray-100 hover:bg-gray-200"
-              }`}
-            >
-              {size}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Bestseller */}
-      <div className="flex items-center gap-2">
-        <input
-          id="best"
-          type="checkbox"
-          checked={bestseller}
-          onChange={() => setBestseller(!bestseller)}
-        />
-
-        <label htmlFor="best">Bestseller</label>
-      </div>
+	{/* Bestseller */}
+	<div className="flex items-center gap-2">
+	  <input
+	    id="best"
+	    type="checkbox"
+	    checked={bestseller}
+	    onChange={() => setBestseller(!bestseller)}
+	  />
+	  <label htmlFor="best">Bestseller</label>
+	</div>
 
       {/* Submit */}
       <button
