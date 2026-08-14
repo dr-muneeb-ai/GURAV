@@ -82,20 +82,6 @@ const Contact = () => {
                 >
                   <FaInstagram size={15} />
                 </a>
-
-                <span
-                  className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 cursor-default"
-                  aria-label="TikTok"
-                >
-                  <FaTiktok size={14} />
-                </span>
-
-                <span
-                  className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 cursor-default"
-                  aria-label="Facebook"
-                >
-                  <FaFacebookF size={14} />
-                </span>
               </div>
             </div>
           </div>
