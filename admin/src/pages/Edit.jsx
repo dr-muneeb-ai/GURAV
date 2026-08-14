@@ -373,7 +373,7 @@ const Edit = ({ token }) => {
         </p>
 
         <div className="flex gap-3 flex-wrap">
-          {["S", "M", "L", "XL", "XXL"].map(
+          {["S", "M", "L", "XL", "Standard"].map(
             (size) => {
               const selected =
                 sizes.includes(size);
