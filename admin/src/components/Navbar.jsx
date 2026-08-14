@@ -1,22 +1,36 @@
 import React from "react";
 import { assets } from "../assets/assets";
 
-const Navbar = ({ setToken }) => {
+const Navbar = ({ setToken, onMenuClick }) => {
   return (
     <header className="sticky top-0 z-50 border-b border-red-500/20 bg-[#09090B]/95 backdrop-blur-2xl shadow-[0_0_35px_rgba(220,20,60,0.18)]">
 
-      <div className="flex items-center justify-between px-6 py-4">
+      <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4">
 
         {/* Left */}
 
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-3 sm:gap-5">
+
+          {/* Hamburger - mobile only */}
+          <button
+            onClick={onMenuClick}
+            className="md:hidden w-10 h-10 rounded-xl border border-red-500/30 flex items-center justify-center text-red-300 hover:bg-red-500/10 transition shrink-0"
+            aria-label="Open menu"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
 
           <div className="flex items-center justify-center">
   <img
     src={assets.logo}
     alt="Logo"
     className="
-      h-16
+      h-10
+      sm:h-16
       w-auto
       object-contain
       drop-shadow-[0_0_15px_rgba(220,20,60,.55)]
@@ -26,7 +40,7 @@ const Navbar = ({ setToken }) => {
     "
   />
 </div>
-          <div>
+          <div className="hidden sm:block">
 
             <h1
               className="
@@ -58,10 +72,12 @@ const Navbar = ({ setToken }) => {
 
         {/* Right */}
 
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-2 sm:gap-5">
 
           <div
             className="
+            hidden
+            sm:block
             rounded-full
             border
             border-red-500/40
@@ -73,7 +89,6 @@ const Navbar = ({ setToken }) => {
             tracking-[0.05em]
             text-red-300
             shadow-[0_0_20px_rgba(220,20,60,.35)]
-            lg:block
             "
             style={{ fontFamily: "Prata, serif" }}
           >
@@ -94,9 +109,11 @@ const Navbar = ({ setToken }) => {
             from-[#8B0000]
             via-[#DC143C]
             to-[#FF1744]
-            px-4
+            px-3
+            sm:px-4
             py-2
-            text-sm
+            text-xs
+            sm:text-sm
             font-bold
             tracking-[0.1em]
             text-white
