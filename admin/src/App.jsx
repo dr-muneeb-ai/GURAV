@@ -217,7 +217,6 @@ useEffect(() => {
         </div>
 
         <button className="rounded-xl bg-transparent px-5 py-3 text-white hover:scale-105 transition">
-          + Add Product
         </button>
       </div>
 
@@ -315,7 +314,8 @@ useEffect(() => {
 
 	  <div className="lg:col-span-2 rounded-3xl bg-transparent p-6 shadow">
 
-	    <h2 className="text-xl font-semibold mb-6">
+	    <h2 className="text-xl font-semibold mb-6"
+	    style = {{"'Prata', Serif"}}>
 	      Revenue Analytics
 	    </h2>
 
