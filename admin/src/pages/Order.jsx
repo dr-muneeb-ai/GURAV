@@ -495,17 +495,17 @@ const Order = ({ token }) => {
                         value={order.status}
                         className="
                         w-full
-                        rounded-xl
-                        bg-white/70
-                        border
-                        border-[#B9572C]/20
-                        px-4
-                        py-3
-                        outline-none
-                        shadow-sm
-                        focus:ring-2
-                        focus:ring-[#B9572C]/30
-                        "
+			  rounded-xl
+			  bg-white/70
+			  border
+			  border-[#B9572C]/20
+			  px-4
+			  py-3
+			  outline-none
+			  shadow-sm
+			  focus:ring-2
+			  focus:ring-[#B9572C]/30
+			  "
                       >
                         <option value="Order Placed">
                           Order Placed
