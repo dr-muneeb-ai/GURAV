@@ -14,6 +14,7 @@ import Settings from "./pages/Settings";
 import List from "./pages/List";
 import Edit from "./pages/Edit";
 import Stats from "./pages/Stats";
+import Chat from "./pages/Chat";
 export const backendUrl = "https://gurav-1.onrender.com";
 export const currency = "A$.";
 
@@ -637,6 +638,10 @@ function App() {
                   path="/orders"
                   element={<Orders token={token} />}
                 />
+                <Route
+		  path="/chat"
+		  element={<Chat token={token} />}
+		/>
 
                 <Route
                   path="/stats"

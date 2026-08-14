@@ -7,12 +7,13 @@ const linkBase =
 
 const Sidebar = ({ isOpen, onClose }) => {
   const links = [
-    { to: "/", label: "Dashboard", icon: "◉" },
-    { to: "/add", label: "Add Product", icon: "＋" },
+    { to: "/", label: "Dashboard", icon: "🌐" },
+    { to: "/add", label: "Add Product", icon: "✚" },
     { to: "/list", label: "Products", icon: "📦" },
-    { to: "/orders", label: "Orders", icon: "◌" },
+    { to: "/orders", label: "Orders", icon: "🛒" },
+    { to: "/chat", label: "Customer Support", icon: "💬" },
     { to: "/stats", label: "Stats", icon: "📊" },
-    { to: "/settings", label: "Settings", icon: "⚙" },
+    { to: "/settings", label: "Settings", icon: "⚙️" },
   ];
 
   return (
