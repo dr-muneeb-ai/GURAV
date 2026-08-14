@@ -49,7 +49,7 @@ const Product = () => {
   // Sets the main image whenever the product data becomes available/changes
   useEffect(() => {
     if (productData) {
-      setImage(backendUrl + productData.image[0]);
+      setImage(productData.image[0]);
     }
   }, [productData]);
 
@@ -160,7 +160,7 @@ const handleBuyNow = async () => {
   if (added) {
     navigate("/cart");
   }
-};   // <-- YE BRACKET MISSING THA
+};
   const renderStars = (rating) => {
     return [...Array(5)].map((_, i) => (
       <img
@@ -256,8 +256,8 @@ const handleBuyNow = async () => {
               {productData.image.map((item, index) => (
                 <img
                   key={index}
-                  src={backendUrl + item}
-                  onClick={() => setImage(backendUrl + item)}
+                  src={item}
+                  onClick={() => setImage(item)}
                   alt=""
                   loading="lazy"
                   decoding="async"
@@ -272,7 +272,7 @@ const handleBuyNow = async () => {
                     transition-colors
                     duration-300
                     ${
-                      image === backendUrl + item
+                      image === item
                         ? "ring-4 ring-[#b9572c]/30 border-[#b9572c]"
                         : "border-transparent hover:border-[#b9572c]"
                     }
