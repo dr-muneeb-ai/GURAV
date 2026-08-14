@@ -82,20 +82,12 @@ const Contact = () => {
                 >
                   <FaInstagram size={15} />
                 </a>
-                <a
-                  href="https://tiktok.com/@dripdistrict"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-[#1d1d1b] hover:text-white hover:border-[#1d1d1b] transition-all duration-300"
+                <a className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-[#1d1d1b] hover:text-white hover:border-[#1d1d1b] transition-all duration-300"
                   aria-label="TikTok"
                 >
                   <FaTiktok size={14} />
                 </a>
-                <a
-                  href="https://facebook.com/dripdistrict"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-[#1d1d1b] hover:text-white hover:border-[#1d1d1b] transition-all duration-300"
+                <a className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-[#1d1d1b] hover:text-white hover:border-[#1d1d1b] transition-all duration-300"
                   aria-label="Facebook"
                 >
                   <FaFacebookF size={14} />
