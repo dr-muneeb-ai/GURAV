@@ -136,7 +136,7 @@ const Contact = () => {
           </p>
 
           <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-4">
-            {['Contact Form', 'Instagram DM', 'Live Chat', 'FAQ', 'Order Tracking'].map((item, i) => (
+            {['Contact Form', 'Instagram DM', 'Live Chat', 'FAQ'].map((item, i) => (
               <div
                 key={i}
                 className="rounded-xl p-4 sm:p-5 text-center text-xs sm:text-sm text-[#1d1d1b] font-medium bg-white/90 backdrop-blur-sm hover:bg-[#1d1d1b] hover:text-white transition-all duration-300 cursor-pointer shadow-sm hover:shadow-lg"

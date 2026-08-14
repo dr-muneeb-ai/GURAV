@@ -132,7 +132,7 @@ const CustomerReviews = () => {
           gap: 2rem;
           width: max-content;
           padding: 0.5rem 1rem;
-          animation: scroll-left 40s linear infinite;
+          animation: scroll-left 25s linear infinite;
         }
 
         .marquee-track:hover .marquee-content {
