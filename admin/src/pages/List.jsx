@@ -41,7 +41,9 @@ const List = ({ token }) => {
       }
     } catch (error) {
       console.log(error);
-      toast.error(error.response?.data?.message || error.message);
+      toast.error(
+        error.response?.data?.message || error.message
+      );
     }
   };
 
@@ -63,8 +65,10 @@ const List = ({ token }) => {
             key={item._id}
             className="border rounded-xl p-4 shadow"
           >
+
+            {/* PRODUCT IMAGE */}
             <img
-              src={backendUrl + item.image[0]}
+              src={item.image?.[0]}
               alt={item.name}
               className="w-full h-52 object-cover rounded-lg"
             />
@@ -94,6 +98,7 @@ const List = ({ token }) => {
               </button>
 
             </div>
+
           </div>
         ))}
 
