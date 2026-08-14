@@ -47,7 +47,7 @@ if (alreadyReviewed) {
 
 const hasPurchased = await Order.findOne({
   userId: req.user.id,
-  payment: true,
+  status: "Delivered",
   items: {
     $elemMatch: {
       productId,
@@ -58,7 +58,7 @@ const hasPurchased = await Order.findOne({
 if (!hasPurchased) {
   return res.status(400).json({
     success: false,
-    message: "You can review only purchased products.",
+    message: "You can review only delivered products.",
   });
 }
 

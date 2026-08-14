@@ -7,7 +7,13 @@ import { toast } from 'react-toastify';
 
 const Order = () => {
 
-  const{ backendUrl, token ,currency, setCartItems } = useContext(ShopContext);
+  const {
+  backendUrl,
+  token,
+  currency,
+  setCartItems,
+  user
+} = useContext(ShopContext);
 
   const [orderData, setOrderData] = useState([])
   const [openOrder, setOpenOrder] = useState(null);
