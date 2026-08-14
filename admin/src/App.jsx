@@ -315,7 +315,7 @@ useEffect(() => {
 	  <div className="lg:col-span-2 rounded-3xl bg-transparent p-6 shadow">
 
 	    <h2 className="text-xl font-semibold mb-6"
-	    style = {{"'Prata', Serif"}}>
+	    style={{ fontFamily: "Prata, serif" }}>
 	      Revenue Analytics
 	    </h2>
 
