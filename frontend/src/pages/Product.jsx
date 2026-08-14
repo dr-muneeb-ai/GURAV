@@ -223,9 +223,9 @@ const handleBuyNow = async () => {
                 rounded-2xl
                 sm:rounded-3xl
                 overflow-hidden
-                bg-grey-100
-                border-2
-                border-grey-300
+                bg-grey
+                border
+                border-grey
                 shadow-lg
                 hover:shadow-xl
                 transition-shadow
@@ -567,8 +567,8 @@ const handleBuyNow = async () => {
     mt-6
     sm:mt-10
     rounded-2xl
-    border
-    border-transparent
+    border-2
+    border-[#708090]
     bg-gradient-to-br
     from-[#708090]
     to-gray-100
@@ -582,7 +582,6 @@ const handleBuyNow = async () => {
     text-xs
     sm:text-lg
     text-[#b9572c]
-    font-black
     font-['Prata']
   "
 >
