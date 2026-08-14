@@ -223,9 +223,9 @@ const handleBuyNow = async () => {
                 rounded-2xl
                 sm:rounded-3xl
                 overflow-hidden
-                bg-grey
-                border
-                border-grey
+                bg-grey-100
+                border-2
+                border-grey-300
                 shadow-lg
                 hover:shadow-xl
                 transition-shadow
