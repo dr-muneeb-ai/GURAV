@@ -181,7 +181,7 @@ const Cart = () => {
                     {/* IMAGE */}
 
                     <img
-                      src={backendUrl + productData.image[0]}
+                      src={productData.image[0]}
                       alt={productData.name}
                       className="
                       w-24
