@@ -22,16 +22,16 @@ const LatestCollection = () => {
 	}, [products]);
 console.log(products);
     return (
-        <div className="py-20 px-6 lg:px-12 max-w-[1600px] mx-auto">
-            <div className="text-center py-8 text-3xl">
+        <div className="my-8 sm:my-10 px-3 sm:px-6 lg:px-10">
+            <div className="text-center text-3xl py-6 sm:py-8">
                 <Title text1={'LATEST'} text2={'COLLECTION'} />
-                <p className="w-3/4 m-auto text-xs sm:text-sm md:text-base text-gray-600">
+                <p className="w-full sm:w-3/4 m-auto text-xs sm:text-sm md:text-base text-gray-600">
                 Discover the latest fashion trends, stylish home décor, and unique gift ideas. Shop our new collection with premium quality, exclusive designs, and fast delivery.
                 </p>
             </div>
 
             {/* Rendering Products */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-1.5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-2.5 gap-y-5 sm:gap-4 lg:gap-6">
                 {latestProducts.map((item, index) => (
 	    <ProductItem
 		  key={index}
