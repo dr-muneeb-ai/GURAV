@@ -46,7 +46,7 @@ const ProductItem = ({
         </div>
 
         {/* DETAILS */}
-        <div className="p-3">
+        <div className="p-2 sm:p-2.5">
           <p className="uppercase text-[10px] tracking-[2px] text-gray-400">
             Premium Collection
           </p>
