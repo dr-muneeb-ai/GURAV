@@ -148,13 +148,6 @@ const Sidebar = ({ isOpen, onClose }) => {
               Admin Panel
             </h3>
 
-            <p
-              className="mt-2 text-xs leading-6 text-gray-400"
-              style={{ fontFamily: "Prata, serif" }}
-            >
-              Manage Products, Orders, Customers and Analytics from one premium dashboard.
-            </p>
-
             <div className="mt-4 h-2 rounded-full bg-gray-800 overflow-hidden">
 
               <div className="h-full w-3/4 rounded-full bg-gradient-to-r from-[#DC143C] to-[#FF1744] shadow-[0_0_15px_rgba(220,20,60,.6)]"></div>
