@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef, useContext, useCallback } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
 import Title from "../components/Title";
 import Newsletter from "../components/Newsletter";
 import { assets } from "../assets/assets";
+import { ShopContext } from "../context/ShopContext";
 import {
   FaInstagram,
   FaTiktok,
@@ -13,49 +16,124 @@ import {
 } from "react-icons/fa";
 
 const Contact = () => {
+  const { backendUrl, token, navigate } = useContext(ShopContext);
+
   const [showChat, setShowChat] = useState(false);
   const [message, setMessage] = useState("");
-  const [chatMessages, setChatMessages] = useState([
-    {
-      id: 1,
-      sender: "support",
-      text: "👋 Hello! Welcome to Drip District.",
-    },
-    {
-      id: 2,
-      sender: "support",
-      text: "How can we help you today?",
-    },
-  ]);
+  const [chatMessages, setChatMessages] = useState([]);
+  const [loadingChat, setLoadingChat] = useState(false);
+  const [sending, setSending] = useState(false);
 
-  const sendMessage = () => {
+  const pollRef = useRef(null);
+  const messagesEndRef = useRef(null);
+
+  // Converts the backend's { sender, message, _id } shape into the
+  // { id, sender, text } shape the UI already renders.
+  const mapMessages = (msgs = []) =>
+    msgs.map((m) => ({
+      id: m._id,
+      sender: m.sender, // "customer" | "admin"
+      text: m.message,
+    }));
+
+  const fetchChat = useCallback(
+    async ({ silent } = {}) => {
+      if (!token) return;
+
+      try {
+        if (!silent) setLoadingChat(true);
+
+        const { data } = await axios.get(`${backendUrl}/api/chat/my`, {
+          headers: { token },
+        });
+
+        if (data.success) {
+          setChatMessages(mapMessages(data.chat.messages));
+        }
+      } catch (error) {
+        console.log(error);
+        if (!silent) toast.error("Could not load chat. Please try again.");
+      } finally {
+        if (!silent) setLoadingChat(false);
+      }
+    },
+    [backendUrl, token]
+  );
+
+  // Load chat when the widget opens, then poll every 4s for admin replies
+  // while it stays open. This is a simple polling-based "live" chat since
+  // there's no websocket server — good enough for low-traffic support chat.
+  useEffect(() => {
+    if (!showChat || !token) return;
+
+    fetchChat();
+
+    pollRef.current = setInterval(() => {
+      fetchChat({ silent: true });
+    }, 4000);
+
+    return () => {
+      if (pollRef.current) clearInterval(pollRef.current);
+    };
+  }, [showChat, token, fetchChat]);
+
+  // Auto-scroll to the latest message
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chatMessages, showChat]);
+
+  const openChat = () => {
+    if (!token) {
+      toast.error("Please login to use live chat");
+      navigate("/login");
+      return;
+    }
+    setShowChat(true);
+  };
+
+  const sendMessage = async () => {
     const trimmedMessage = message.trim();
 
     if (!trimmedMessage) return;
 
-    const newMessage = {
-      id: Date.now(),
-      sender: "customer",
-      text: trimmedMessage,
-    };
+    if (!token) {
+      toast.error("Please login to send a message");
+      navigate("/login");
+      return;
+    }
 
-    setChatMessages((prev) => [...prev, newMessage]);
+    // Optimistic UI: show the message immediately, replace with server
+    // state once the request resolves.
+    const optimisticId = `temp-${Date.now()}`;
+
+    setChatMessages((prev) => [
+      ...prev,
+      { id: optimisticId, sender: "customer", text: trimmedMessage },
+    ]);
     setMessage("");
+    setSending(true);
 
-    /*
-      IMPORTANT:
-      Yahan baad mein tumhari actual Chat API connect hogi.
-
-      Example:
-      await axios.post(
+    try {
+      const { data } = await axios.post(
         `${backendUrl}/api/chat/send`,
         { message: trimmedMessage },
         { headers: { token } }
       );
 
-      Abhi API route invent nahi kiya gaya,
-      kyunki tumne backend chat route provide nahi kiya.
-    */
+      if (data.success) {
+        setChatMessages(mapMessages(data.chat.messages));
+      } else {
+        toast.error(data.message || "Message failed to send");
+        // Roll back the optimistic message on failure
+        setChatMessages((prev) => prev.filter((m) => m.id !== optimisticId));
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error?.response?.data?.message || "Message failed to send");
+      setChatMessages((prev) => prev.filter((m) => m.id !== optimisticId));
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -258,7 +336,7 @@ const Contact = () => {
                 key={i}
                 onClick={() => {
                   if (item === "Live Chat") {
-                    setShowChat(true);
+                    openChat();
                   }
                 }}
                 className={`
@@ -401,38 +479,48 @@ const Contact = () => {
               space-y-3
             ">
 
-              {chatMessages.map((chat) => (
+              {loadingChat ? (
+                <p className="text-center text-xs text-gray-400 mt-10">
+                  Loading chat...
+                </p>
+              ) : (
 
-                <div
-                  key={chat.id}
-                  className={`flex ${
-                    chat.sender === "customer"
-                      ? "justify-end"
-                      : "justify-start"
-                  }`}
-                >
+                chatMessages.map((chat) => (
 
                   <div
-                    className={`
-                      max-w-[82%]
-                      px-4
-                      py-3
-                      text-sm
-                      shadow-sm
-
-                      ${
-                        chat.sender === "customer"
-                          ? "bg-[#b9572c] text-white rounded-2xl rounded-br-none"
-                          : "bg-white text-gray-700 rounded-2xl rounded-tl-none"
-                      }
-                    `}
+                    key={chat.id}
+                    className={`flex ${
+                      chat.sender === "customer"
+                        ? "justify-end"
+                        : "justify-start"
+                    }`}
                   >
-                    {chat.text}
+
+                    <div
+                      className={`
+                        max-w-[82%]
+                        px-4
+                        py-3
+                        text-sm
+                        shadow-sm
+
+                        ${
+                          chat.sender === "customer"
+                            ? "bg-[#b9572c] text-white rounded-2xl rounded-br-none"
+                            : "bg-white text-gray-700 rounded-2xl rounded-tl-none"
+                        }
+                      `}
+                    >
+                      {chat.text}
+                    </div>
+
                   </div>
 
-                </div>
+                ))
 
-              ))}
+              )}
+
+              <div ref={messagesEndRef} />
 
             </div>
 
@@ -469,7 +557,7 @@ const Contact = () => {
 
                 <button
                   onClick={sendMessage}
-                  disabled={!message.trim()}
+                  disabled={!message.trim() || sending}
                   className="
                     w-11
                     h-11

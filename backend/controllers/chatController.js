@@ -18,24 +18,34 @@ export const getMyChat = async (req, res) => {
       });
     }
 
-    let chat = await Chat.findOne({ userId });
-
-    // First time customer opens chat
-    if (!chat) {
-      chat = await Chat.create({
-        userId,
-        messages: [
-          {
-            sender: "admin",
-            message: "👋 Hello! Welcome to Drip District.",
-          },
-          {
-            sender: "admin",
-            message: "How can we help you today?",
-          },
-        ],
-      });
-    }
+    // Atomic find-or-create: prevents the duplicate-key race condition that
+    // happens when getMyChat is called twice almost simultaneously (e.g.
+    // React StrictMode double-invoking useEffect in dev). Using
+    // findOneAndUpdate + upsert guarantees only one chat doc is ever created
+    // per user, even under concurrent requests.
+    const chat = await Chat.findOneAndUpdate(
+      { userId },
+      {
+        $setOnInsert: {
+          userId,
+          messages: [
+            {
+              sender: "admin",
+              message: "👋 Hello! Welcome to Drip District.",
+            },
+            {
+              sender: "admin",
+              message: "How can we help you today?",
+            },
+          ],
+        },
+      },
+      {
+        new: true,
+        upsert: true,
+        setDefaultsOnInsert: true,
+      }
+    );
 
     res.json({
       success: true,
@@ -76,21 +86,25 @@ export const sendCustomerMessage = async (req, res) => {
       });
     }
 
-    let chat = await Chat.findOne({ userId });
-
-    if (!chat) {
-      chat = await Chat.create({
-        userId,
-        messages: [],
-      });
-    }
-
-    chat.messages.push({
-      sender: "customer",
-      message: message.trim(),
-    });
-
-    await chat.save();
+    // Same atomic find-or-create + push, done in a single operation so two
+    // near-simultaneous sends can't race each other into a duplicate-key error.
+    const chat = await Chat.findOneAndUpdate(
+      { userId },
+      {
+        $setOnInsert: { userId },
+        $push: {
+          messages: {
+            sender: "customer",
+            message: message.trim(),
+          },
+        },
+      },
+      {
+        new: true,
+        upsert: true,
+        setDefaultsOnInsert: true,
+      }
+    );
 
     res.json({
       success: true,
