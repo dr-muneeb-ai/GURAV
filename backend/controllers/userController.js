@@ -5,6 +5,7 @@ import validator from "validator";
 import User from "../models/User.js";
 import Product from "../models/Product.js";
 import Order from "../models/Order.js";
+import cloudinary from "../config/cloudinary.js";
 
 const createToken = (id) => {
   return jwt.sign(
@@ -12,6 +13,23 @@ const createToken = (id) => {
     process.env.JWT_SECRET,
     { expiresIn: "7d" }
   );
+};
+
+// ================= Helper: Upload buffer to Cloudinary =================
+// Same pattern as productController.js, just a separate folder so profile
+// pictures don't mix with product images.
+
+const uploadToCloudinary = (fileBuffer) => {
+  return new Promise((resolve, reject) => {
+    const stream = cloudinary.uploader.upload_stream(
+      { folder: "gurav-users", resource_type: "image" },
+      (error, result) => {
+        if (error) reject(error);
+        else resolve(result.secure_url);
+      }
+    );
+    stream.end(fileBuffer);
+  });
 };
 
 // ================= Register =================
@@ -70,6 +88,7 @@ const registerUser = async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
+        profileImage: user.profileImage || "",
       },
     });
 
@@ -130,6 +149,7 @@ const loginUser = async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
+        profileImage: user.profileImage || "",
       },
     });
 
@@ -201,6 +221,86 @@ const adminLogin = async (req, res) => {
 
   }
 
+};
+
+// ================= Get Current User Profile =================
+// Requires auth middleware (req.user.id). Useful for re-fetching the
+// latest profile (e.g. after a picture upload, or on app reload).
+
+const getProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        profileImage: user.profileImage || "",
+      },
+    });
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+// ================= Update Profile Picture =================
+// Requires auth middleware (req.user.id) + multer upload.single("image").
+
+const updateProfilePicture = async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({
+        success: false,
+        message: "Please select an image to upload",
+      });
+    }
+
+    const user = await User.findById(req.user.id);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    const imageUrl = await uploadToCloudinary(req.file.buffer);
+
+    user.profileImage = imageUrl;
+    await user.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Profile picture updated successfully",
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        profileImage: user.profileImage,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 // ================= Dashboard Data =================
@@ -310,4 +410,6 @@ export {
   loginUser,
   adminLogin,
   dashboardData,
+  getProfile,
+  updateProfilePicture,
 };

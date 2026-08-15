@@ -74,18 +74,38 @@ function Navbar() {
 
             {/* Profile */}
             <div className="group relative">
-              <img
-                onClick={() => (token ? null : navigate("/login"))}
-                src={assets.profile_icon}
-                className="w-5 cursor-pointer hover:scale-110 transition-transform"
-                alt="Profile"
-              />
+              {user?.profileImage ? (
+                <img
+                  onClick={() =>
+                    navigate(token ? "/profile" : "/login")
+                  }
+                  src={user.profileImage}
+                  className="w-7 h-7 rounded-full object-cover cursor-pointer border border-gray-300 hover:scale-110 transition-transform"
+                  alt="Profile"
+                />
+              ) : (
+                <img
+                  onClick={() =>
+                    navigate(token ? "/profile" : "/login")
+                  }
+                  src={assets.profile_icon}
+                  className="w-5 cursor-pointer hover:scale-110 transition-transform"
+                  alt="Profile"
+                />
+              )}
 
               {token && (
                 <div className="group-hover:block hidden absolute right-0 pt-4">
                   <div className="flex flex-col gap-3 w-40 py-4 px-5 bg-white text-gray-600 rounded-lg shadow-xl border border-gray-100">
                     <p className="font-semibold text-black">
                       {user?.name || "User"}
+                    </p>
+
+                    <p
+                      onClick={() => navigate("/profile")}
+                      className="cursor-pointer hover:text-black"
+                    >
+                      My Profile
                     </p>
 
                     <p
@@ -154,6 +174,36 @@ function Navbar() {
               {item}
             </NavLink>
           ))}
+
+          {token ? (
+            <>
+              <NavLink
+                to="/profile"
+                onClick={() => setVisible(false)}
+                className="py-3 border-b border-gray-200 hover:text-black"
+              >
+                My Profile
+              </NavLink>
+
+              <p
+                onClick={() => {
+                  setVisible(false);
+                  logout();
+                }}
+                className="py-3 border-b border-gray-200 hover:text-black cursor-pointer"
+              >
+                Logout
+              </p>
+            </>
+          ) : (
+            <NavLink
+              to="/login"
+              onClick={() => setVisible(false)}
+              className="py-3 border-b border-gray-200 hover:text-black"
+            >
+              Login
+            </NavLink>
+          )}
         </ul>
       </div>
     </nav>

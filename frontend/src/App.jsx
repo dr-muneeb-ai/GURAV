@@ -16,6 +16,7 @@ import OrderSuccess from "./pages/OrderSuccess";
 import Verify from "./pages/Verify";
 import ReturnPolicy from "./pages/ReturnPolicy";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Profile from "./pages/Profile";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import SearchBar from "./components/SearchBar";
@@ -115,6 +116,10 @@ const App = () => {
           <Route
             path="/verify"
             element={<Verify />}
+          />
+          <Route
+            path="/profile"
+            element={<Profile />}
           />
         </Routes>
       </main>

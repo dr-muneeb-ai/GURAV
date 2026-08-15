@@ -18,6 +18,11 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
 
+    profileImage: {
+      type: String,
+      default: "",
+    },
+
     cartData: {
       type: Object,
       default: {},
@@ -36,4 +41,3 @@ const userSchema = new mongoose.Schema(
 const User = mongoose.models.User || mongoose.model("User", userSchema);
 
 export default User;
-
