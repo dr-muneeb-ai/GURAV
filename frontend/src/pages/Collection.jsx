@@ -793,7 +793,7 @@ const Collection = () => {
                         items-center
                         gap-2
                         px-3
-                        py-1.5
+                        py-2
                         rounded-full
                         bg-[#b9572c]/10
                         border
