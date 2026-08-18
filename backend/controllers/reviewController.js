@@ -96,7 +96,7 @@ export const getProductReviews = async (req, res) => {
     const reviews = await Review.find({
       productId: req.params.productId,
     })
-      .populate("userId", "name")
+      .populate("userId", "name profileImage")
       .sort({ createdAt: -1 });
 
     const reviewsCount = reviews.length;
@@ -145,7 +145,7 @@ export const getLatestReviews = async (req, res) => {
       rating: { $gte: 4 },
       comment: { $ne: "" },
     })
-      .populate("userId", "name")
+      .populate("userId", "name profileImage")
       .populate("productId", "name image")
       .sort({ createdAt: -1 })
       .limit(limit);
@@ -157,7 +157,7 @@ export const getLatestReviews = async (req, res) => {
         _id: { $nin: excludeIds },
         comment: { $ne: "" },
       })
-        .populate("userId", "name")
+        .populate("userId", "name profileImage")
         .populate("productId", "name image")
         .sort({ createdAt: -1 })
         .limit(limit - reviews.length);
