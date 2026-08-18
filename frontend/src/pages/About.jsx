@@ -61,11 +61,7 @@ const About = () => {
           </b>
 
           <p className="text-sm sm:text-base leading-6 sm:leading-7">
-            We're more than a clothing brand — we're a community built on
-            self-expression. From Adelaide to Sydney and everywhere in
-            between, Drip District exists for people who dress with intent
-            and wear their confidence loud. Every drop is designed to move
-            with modern fashion culture, not follow it.
+            We are a community based on self-expression, not just a clothing company. Drip District is a place for people who wear their confidence loudly and dress with purpose, from Adelaide to Sydney and all points in between. Each drop is made to flow with contemporary fashion culture rather than to conform to it.
           </p>
 
           <b className="text-gray-900 text-lg sm:text-xl mt-2" style={{ fontFamily: "'Prata', serif" }}>
