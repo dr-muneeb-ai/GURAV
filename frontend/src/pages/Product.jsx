@@ -463,7 +463,7 @@ const handleBuyNow = async () => {
                       ) : (
                         <div
                           key={r._id || i}
-                          className="w-7 h-7 rounded-full bg-gradient-to-br from-[#121212] via-[#ece7e2] to-[#121212] text-white text-[10px] font-semibold flex items-center justify-center border-2 border-[#121212]"
+                          className="w-7 h-7 rounded-full bg-[#b9572c] text-white text-[10px] font-semibold flex items-center justify-center border-2 border-white"
                         >
                           {initials(r.userId?.name)}
                         </div>
