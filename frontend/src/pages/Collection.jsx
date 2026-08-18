@@ -839,6 +839,9 @@ const Collection = () => {
                       id={item._id}
                       price={item.price}
                       image={item.image}
+                      bestseller={item.bestseller}
+                      rating={item.rating}
+                      reviewsCount={item.reviewsCount}
                     />
                   )
                 )}
