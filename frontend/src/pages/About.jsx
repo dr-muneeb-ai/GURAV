@@ -69,10 +69,7 @@ const About = () => {
           </b>
 
           <p className="text-sm sm:text-base leading-6 sm:leading-7">
-            To make premium streetwear accessible to every Australian who
-            wants to stand out. We obsess over fit, fabric, and finish so
-            that when you wear Drip District, you feel it before anyone
-            else even sees it.
+            To enable every Australian who wishes to stand out to have access to high-end streetwear. Fit, fabric, and finish are our top priorities so that when you wear Drip District, you can sense it before anyone else does.
           </p>
         </div>
 
@@ -83,7 +80,7 @@ const About = () => {
               style={{ fontFamily: "'Prata', serif" }}
             >
               "Dress with intent. <br />
-              Wear your confidence loud."
+              Show off your self-assurance."
             </p>
             <div className="w-12 h-[3px] bg-[#b9572c] rounded-full mt-5"></div>
           </div>
@@ -103,11 +100,11 @@ const About = () => {
             className="text-2xl sm:text-4xl text-white"
             style={{ fontFamily: "'Prata', serif" }}
           >
-            Premium, By Design
+            High-quality, by design
           </h2>
 
           <p className="text-gray-400 text-sm sm:text-base mt-3 max-w-xl mx-auto">
-            Every piece is chosen and finished to a standard, not a season.
+            Each piece is selected and completed to a standard rather than a season.
           </p>
         </div>
 
@@ -118,11 +115,10 @@ const About = () => {
               <FaGem className="text-white" />
             </div>
             <h3 className="text-white text-lg sm:text-xl font-semibold mb-2">
-              Premium Materials
+              High-quality Items
             </h3>
             <p className="text-gray-400 text-sm sm:text-base leading-6 sm:leading-7">
-              Heavyweight cotton, real leather, and durable hardware —
-              nothing that fades, thins, or falls apart after a few washes.
+              Real leather, sturdy hardware, and heavyweight cotton—nothing that wears out, thins, or crumbles after a few washes.
             </p>
           </div>
 
@@ -131,11 +127,10 @@ const About = () => {
               <FaCity className="text-white" />
             </div>
             <h3 className="text-white text-lg sm:text-xl font-semibold mb-2">
-              Global Trends, Local Roots
+              Global Patterns, Local Origins
             </h3>
             <p className="text-gray-400 text-sm sm:text-base leading-6 sm:leading-7">
-              We track international streetwear culture and translate it
-              into pieces designed for how Australians actually dress.
+              We follow global streetwear trends and adapt them into clothing that is appropriate for Australians.
             </p>
           </div>
 
@@ -144,11 +139,10 @@ const About = () => {
               <FaShippingFast className="text-white" />
             </div>
             <h3 className="text-white text-lg sm:text-xl font-semibold mb-2">
-              Built to Last, Delivered Fast
+              High Standard and Delivered Quickly
             </h3>
             <p className="text-gray-400 text-sm sm:text-base leading-6 sm:leading-7">
-              Quick, tracked shipping across Australia — because premium
-              shouldn't mean waiting weeks to wear it.
+              Fast, tracked shipping throughout Australia—because wearing a high-end item shouldn't have to wait weeks.
             </p>
           </div>
 
@@ -162,7 +156,7 @@ const About = () => {
               2
             </h3>
             <p className="text-gray-400 text-xs sm:text-sm mt-1 uppercase tracking-wide">
-              Cities Served
+              Surveyed Cities
             </p>
           </div>
 
@@ -171,7 +165,7 @@ const About = () => {
               100%
             </h3>
             <p className="text-gray-400 text-xs sm:text-sm mt-1 uppercase tracking-wide">
-              Australia Owned
+              Australia Possessed
             </p>
           </div>
 
@@ -199,9 +193,8 @@ const About = () => {
           <FaGem className="text-[#b9572c] text-2xl sm:text-3xl" />
           <b className="text-base sm:text-lg text-gray-900">Quality Assurance</b>
           <p className="text-gray-600 text-sm sm:text-base leading-6 sm:leading-7">
-            Every piece goes through strict quality checks before it ships.
-            We source premium fabrics and hardware so what you wear holds
-            up wash after wash, wear after wear.
+            Before it ships, each item is subjected to stringent quality inspections.
+            We source high-quality materials and hardware to ensure that your clothing lasts through multiple washings and wearings.
           </p>
         </div>
 
@@ -209,19 +202,15 @@ const About = () => {
           <FaTruck className="text-[#b9572c] text-2xl sm:text-3xl" />
           <b className="text-base sm:text-lg text-gray-900">Easy Delivery & Returns</b>
           <p className="text-gray-600 text-sm sm:text-base leading-6 sm:leading-7">
-            Fast, reliable shipping across Australia with hassle-free
-            returns and exchanges within 7 days. Seamless from checkout
-            to your doorstep.
+            Shipping throughout Australia is quick, dependable, and hassle-free. Returns and exchanges are accepted within 7 days. smooth from the point of sale to your door.
           </p>
         </div>
 
         <div className="rounded-2xl sm:rounded-3xl border border-gray-200 px-6 sm:px-10 py-8 sm:py-14 flex flex-col gap-3 sm:gap-4 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
           <FaHeadset className="text-[#b9572c] text-2xl sm:text-3xl" />
-          <b className="text-base sm:text-lg text-gray-900">Real Customer Support</b>
+          <b className="text-base sm:text-lg text-gray-900">Customer Support</b>
           <p className="text-gray-600 text-sm sm:text-base leading-6 sm:leading-7">
-            Our support team is here to actually help — questions, sizing,
-            order issues, all sorted quickly by real people who care about
-            getting it right.
+            Questions, sizing, and order issues can all be promptly resolved by our support staff, who are real people who genuinely care about getting things done correctly.
           </p>
         </div>
 
