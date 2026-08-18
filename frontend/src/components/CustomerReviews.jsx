@@ -92,9 +92,17 @@ const CustomerReviews = () => {
                 {/* User */}
                 <div className="flex items-center gap-3 mt-8">
 
-                  <div className="w-12 h-12 rounded-full bg-[#b9572c] text-white flex items-center justify-center font-semibold shrink-0">
-                    {initials(item.userId?.name)}
-                  </div>
+                  {item.userId?.profileImage ? (
+                    <img
+                      src={item.userId.profileImage}
+                      alt={item.userId?.name || "Customer"}
+                      className="w-12 h-12 rounded-full object-cover shrink-0 border border-[#e8dccd]"
+                    />
+                  ) : (
+                    <div className="w-12 h-12 rounded-full bg-[#b9572c] text-white flex items-center justify-center font-semibold shrink-0">
+                      {initials(item.userId?.name)}
+                    </div>
+                  )}
 
                   <div>
 
