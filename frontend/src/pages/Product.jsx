@@ -1,6 +1,7 @@
 import React, {
   useContext,
   useEffect,
+  useRef,
   useState,
   lazy,
   Suspense,
@@ -15,6 +16,15 @@ import { assets } from "../assets/assets";
 const RelatedProducts = lazy(() =>
   import("../components/Relatedproducts")
 );
+
+const initials = (name = "") =>
+  name
+    .trim()
+    .split(" ")
+    .map((part) => part[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
 
 const Product = () => {
   const { productId } = useParams();
@@ -45,6 +55,10 @@ const Product = () => {
   const [submittingReview, setSubmittingReview] = useState(false);
   const [ratingAverage, setRatingAverage] = useState(0);
   const [reviewsCount, setReviewsCount] = useState(0);
+
+  // Swipe tracking for the main image gallery
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
 
   // Sets the main image whenever the product data becomes available/changes
   useEffect(() => {
@@ -176,6 +190,46 @@ const handleBuyNow = async () => {
     ));
   };
 
+  // ================= IMAGE SWIPE HANDLERS =================
+
+  const goToNextImage = () => {
+    if (!productData) return;
+    const currentIndex = productData.image.findIndex((img) => img === image);
+    const nextIndex = (currentIndex + 1) % productData.image.length;
+    setImage(productData.image[nextIndex]);
+  };
+
+  const goToPrevImage = () => {
+    if (!productData) return;
+    const currentIndex = productData.image.findIndex((img) => img === image);
+    const prevIndex =
+      (currentIndex - 1 + productData.image.length) %
+      productData.image.length;
+    setImage(productData.image[prevIndex]);
+  };
+
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const distance = touchStartX.current - touchEndX.current;
+    const swipeThreshold = 50;
+
+    if (distance > swipeThreshold) {
+      goToNextImage();
+    } else if (distance < -swipeThreshold) {
+      goToPrevImage();
+    }
+
+    touchStartX.current = 0;
+    touchEndX.current = 0;
+  };
+
   if (!productData)
     return <div className="opacity-0"></div>;
 
@@ -216,9 +270,13 @@ const handleBuyNow = async () => {
             gap-3
             sm:gap-4
           ">
-            {/* MAIN IMAGE */}
+            {/* MAIN IMAGE (swipeable) */}
             <div
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
               className="
+                relative
                 aspect-square
                 rounded-2xl
                 sm:rounded-3xl
@@ -230,6 +288,7 @@ const handleBuyNow = async () => {
                 hover:shadow-xl
                 transition-shadow
                 duration-500
+                select-none
               "
             >
               <img
@@ -237,6 +296,7 @@ const handleBuyNow = async () => {
                 alt={productData.name}
                 loading="lazy"
                 decoding="async"
+                draggable={false}
                 className="
                   w-full
                   h-full
@@ -248,7 +308,48 @@ const handleBuyNow = async () => {
                   duration-300
                 "
               />
+
+              {/* Prev/Next arrows - desktop only, mobile relies on swipe */}
+              {productData.image.length > 1 && (
+                <>
+                  <button
+                    onClick={goToPrevImage}
+                    className="hidden sm:flex absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/80 hover:bg-white items-center justify-center shadow-md transition"
+                    aria-label="Previous image"
+                    type="button"
+                  >
+                    ‹
+                  </button>
+
+                  <button
+                    onClick={goToNextImage}
+                    className="hidden sm:flex absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/80 hover:bg-white items-center justify-center shadow-md transition"
+                    aria-label="Next image"
+                    type="button"
+                  >
+                    ›
+                  </button>
+                </>
+              )}
             </div>
+
+            {/* DOT INDICATORS - mirrors the swipeable gallery position */}
+            {productData.image.length > 1 && (
+              <div className="flex justify-center items-center gap-1.5">
+                {productData.image.map((item, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setImage(item)}
+                    aria-label={`Go to image ${index + 1}`}
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      image === item
+                        ? "w-5 bg-[#b9572c]"
+                        : "w-2 bg-gray-300 hover:bg-gray-400"
+                    }`}
+                  />
+                ))}
+              </div>
+            )}
 
             {/* THUMBNAILS */}
             <div className="
@@ -329,6 +430,52 @@ const handleBuyNow = async () => {
                   {reviewsCount} Customer Reviews
                 </button>
               </div>
+
+              {/* TRUSTED BY - stacked reviewer avatars */}
+              {reviews.length > 0 && (
+                <button
+                  onClick={() => setShowReviews(true)}
+                  className="
+                    mt-3
+                    sm:mt-4
+                    inline-flex
+                    items-center
+                    gap-3
+                    bg-gray-100
+                    hover:bg-gray-200
+                    transition-colors
+                    rounded-full
+                    pl-1.5
+                    pr-4
+                    py-1.5
+                  "
+                  type="button"
+                >
+                  <div className="flex -space-x-2.5">
+                    {reviews.slice(0, 3).map((r, i) =>
+                      r.userId?.profileImage ? (
+                        <img
+                          key={r._id || i}
+                          src={r.userId.profileImage}
+                          alt={r.userId?.name || "Customer"}
+                          className="w-7 h-7 rounded-full object-cover border-2 border-white"
+                        />
+                      ) : (
+                        <div
+                          key={r._id || i}
+                          className="w-7 h-7 rounded-full bg-[#b9572c] text-white text-[10px] font-semibold flex items-center justify-center border-2 border-white"
+                        >
+                          {initials(r.userId?.name)}
+                        </div>
+                      )
+                    )}
+                  </div>
+
+                  <span className="text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wide">
+                    Trusted by {reviewsCount}+ customers
+                  </span>
+                </button>
+              )}
 
               {/* PRICE */}
               <div className="mt-4 sm:mt-5">
@@ -560,6 +707,14 @@ const handleBuyNow = async () => {
             </div>
           </div>
         </div>
+
+        {/* RELATED PRODUCTS - moved above the trust box, per request */}
+        <Suspense fallback={<div className="h-40"></div>}>
+          <RelatedProducts
+            category={productData.category}
+            subCategory={productData.subCategory}
+          />
+        </Suspense>
 
         {/* TRUST BOX */}
         <div
@@ -806,19 +961,33 @@ to-gray-100
                   <div className="space-y-5 sm:space-y-6">
                     {reviews.map((review) => (
                       <div key={review._id} className="border-b pb-4 sm:pb-5">
-                        <div className="flex items-center gap-2">
-                          <h3 className="font-semibold text-sm sm:text-base">
-                            {review.userId?.name}
-                          </h3>
-
-                          {review.verifiedPurchase && (
-                            <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
-                              ✓ Verified Purchase
-                            </span>
+                        <div className="flex items-center gap-3">
+                          {review.userId?.profileImage ? (
+                            <img
+                              src={review.userId.profileImage}
+                              alt={review.userId?.name || "Customer"}
+                              className="w-9 h-9 rounded-full object-cover shrink-0"
+                            />
+                          ) : (
+                            <div className="w-9 h-9 rounded-full bg-[#b9572c] text-white text-xs font-semibold flex items-center justify-center shrink-0">
+                              {initials(review.userId?.name)}
+                            </div>
                           )}
+
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <h3 className="font-semibold text-sm sm:text-base">
+                              {review.userId?.name}
+                            </h3>
+
+                            {review.verifiedPurchase && (
+                              <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
+                                ✓ Verified Purchase
+                              </span>
+                            )}
+                          </div>
                         </div>
 
-                        <div className="text-yellow-500 text-base sm:text-lg">
+                        <div className="text-yellow-500 text-base sm:text-lg mt-2">
                           {"★".repeat(review.rating)}
                           {"☆".repeat(5 - review.rating)}
                         </div>
@@ -838,14 +1007,6 @@ to-gray-100
             </div>
           </div>
         )}
-
-        {/* RELATED PRODUCTS */}
-        <Suspense fallback={<div className="h-40"></div>}>
-          <RelatedProducts
-            category={productData.category}
-            subCategory={productData.subCategory}
-          />
-        </Suspense>
       </div>
     </div>
   );
