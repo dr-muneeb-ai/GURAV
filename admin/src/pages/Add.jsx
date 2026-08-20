@@ -43,6 +43,23 @@ const WOMEN_SHOE_SIZES = [
 
 const STANDARD_SIZES = ["S", "M", "L", "XL", "Standard"];
 
+const SHOE_SUBCATEGORIES = [
+  "NIKE TN",
+  "NIKE SHOX",
+  "LV",
+  "GUCCI",
+  "PRADA",
+  "DIOR",
+  "BALENCIAGA",
+];
+
+const DEFAULT_SUBCATEGORIES = [
+  "Premium",
+  "Classic",
+  "Luxury",
+  "Limited Edition",
+];
+
 const Add = ({ token }) => {
   const [images, setImages] = useState([]);
 
@@ -56,10 +73,14 @@ const Add = ({ token }) => {
   const [tags, setTags] = useState("");
   const [bestseller, setBestseller] = useState(false);
 
-  // Clear previously picked sizes whenever category changes so a leftover
-  // "S/M/L" doesn't stay selected on a shoe product (or vice versa).
+  // Clear previously picked sizes / subCategory whenever category changes
+  // so a leftover "S/M/L" or "Premium" doesn't stay selected on a shoe
+  // product (or vice versa).
   useEffect(() => {
     setSizes([]);
+    setSubCategory(
+      category === "Shoes" ? SHOE_SUBCATEGORIES[0] : DEFAULT_SUBCATEGORIES[0]
+    );
   }, [category]);
 
   const onSubmitHandler = async (e) => {
@@ -215,7 +236,7 @@ const Add = ({ token }) => {
             onChange={(e) => setCategory(e.target.value)}
           >
             <option>Watches</option>
-            <option>Sneakers</option>
+            <option>Shoes</option>
             <option>Hoodies</option>
             <option>Accessories</option>
           </select>
@@ -229,10 +250,12 @@ const Add = ({ token }) => {
             value={subCategory}
             onChange={(e) => setSubCategory(e.target.value)}
           >
-            <option>Premium</option>
-            <option>Classic</option>
-            <option>Luxury</option>
-            <option>Limited Edition</option>
+            {(category === "Shoes"
+              ? SHOE_SUBCATEGORIES
+              : DEFAULT_SUBCATEGORIES
+            ).map((sub) => (
+              <option key={sub}>{sub}</option>
+            ))}
           </select>
         </div>
 
@@ -254,7 +277,7 @@ const Add = ({ token }) => {
 	<div>
 	  <p className="mb-2 font-semibold">Sizes</p>
 
-	  {category === "Sneakers" ? (
+	  {category === "Shoes" ? (
 	    <>
 	      {/* Men / Women toggle for shoe size chart */}
 	      <div className="flex gap-3 mb-3">
@@ -266,7 +289,7 @@ const Add = ({ token }) => {
 		    className={`px-3 py-1.5 text-sm rounded-md border transition ${
 		      shoeGender === g
 			? "bg-gray-900 text-white border-gray-900"
-			: "bg-transparent text-gray-600 border-gray-300 hover:text-gray-900"
+			: "bg-transparent text-gray-300 border-gray-500 hover:text-white"
 		    }`}
 		  >
 		    {g}
@@ -295,7 +318,7 @@ const Add = ({ token }) => {
 		      className={`px-3 py-2 rounded-md text-sm transition flex flex-col items-center leading-tight ${
 			sizes.includes(sizeLabel)
 			  ? "bg-blue-600 text-white"
-			  : "bg-transparent text-gray-600 hover:text-gray-900 border border-gray-300"
+			  : "bg-transparent text-gray-300 hover:text-white border border-gray-500"
 		      }`}
 		    >
 		      <span>US {us}</span>
@@ -323,7 +346,7 @@ const Add = ({ token }) => {
 		  className={`px-4 py-2 rounded-md transition ${
 		    sizes.includes(size)
 		      ? "bg-blue-600 text-white"
-		      : "bg-transparent text-gray-600 hover:text-gray-900"
+		      : "bg-transparent text-gray-300 hover:text-white border border-gray-500"
 		  }`}
 		>
 		  {size}

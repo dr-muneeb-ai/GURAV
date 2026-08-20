@@ -44,6 +44,23 @@ const WOMEN_SHOE_SIZES = [
 
 const STANDARD_SIZES = ["S", "M", "L", "XL", "Standard"];
 
+const SHOE_SUBCATEGORIES = [
+  "NIKE TN",
+  "NIKE SHOX",
+  "LV",
+  "GUCCI",
+  "PRADA",
+  "DIOR",
+  "BALENCIAGA",
+];
+
+const DEFAULT_SUBCATEGORIES = [
+  "Premium",
+  "Classic",
+  "Luxury",
+  "Limited Edition",
+];
+
 // Figures out which gender chart a saved size label like "Women US 8 / EU 39"
 // belongs to, so editing an existing shoe product pre-selects the right tab.
 const detectShoeGender = (savedSizes = []) => {
@@ -364,17 +381,28 @@ const Edit = ({ token }) => {
       <div className="flex gap-4 flex-wrap">
         <select
           value={category}
-          onChange={(e) =>
-            setCategory(e.target.value)
-          }
+          onChange={(e) => {
+            const newCategory = e.target.value;
+            setCategory(newCategory);
+
+            // Only reset sizes/subCategory when the admin manually
+            // switches category — not while the fetched product is
+            // first loading in.
+            setSizes([]);
+            setSubCategory(
+              newCategory === "Shoes"
+                ? SHOE_SUBCATEGORIES[0]
+                : DEFAULT_SUBCATEGORIES[0]
+            );
+          }}
           className="border p-3 rounded"
         >
           <option value="Watches">
             Watches
           </option>
 
-          <option value="Sneakers">
-            Sneakers
+          <option value="Shoes">
+            Shoes
           </option>
 
           <option value="Hoodies">
@@ -393,21 +421,14 @@ const Edit = ({ token }) => {
           }
           className="border p-3 rounded"
         >
-          <option value="Premium">
-            Premium
-          </option>
-
-          <option value="Classic">
-            Classic
-          </option>
-
-          <option value="Luxury">
-            Luxury
-          </option>
-
-          <option value="Limited Edition">
-            Limited Edition
-          </option>
+          {(category === "Shoes"
+            ? SHOE_SUBCATEGORIES
+            : DEFAULT_SUBCATEGORIES
+          ).map((sub) => (
+            <option key={sub} value={sub}>
+              {sub}
+            </option>
+          ))}
         </select>
 
         <input
@@ -431,7 +452,7 @@ const Edit = ({ token }) => {
           Sizes
         </p>
 
-        {category === "Sneakers" ? (
+        {category === "Shoes" ? (
           <>
             {/* Men / Women toggle for shoe size chart */}
             <div className="flex gap-3 mb-3">
