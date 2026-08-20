@@ -60,11 +60,19 @@ const Collection = () => {
   const applyFilter = () => {
     let productsCopy = [...products];
 
-    // Search
+    // Search (matches product name OR any tag, e.g. "running", "leather")
     if (showSearch && search) {
-      productsCopy = productsCopy.filter((item) =>
-        item.name.toLowerCase().includes(search.toLowerCase())
-      );
+      const query = search.toLowerCase();
+
+      productsCopy = productsCopy.filter((item) => {
+        const nameMatch = item.name.toLowerCase().includes(query);
+
+        const tagMatch = (item.tags || []).some((tag) =>
+          tag.toLowerCase().includes(query)
+        );
+
+        return nameMatch || tagMatch;
+      });
     }
 
     // Category

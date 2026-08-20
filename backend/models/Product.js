@@ -32,6 +32,12 @@ const productSchema = new mongoose.Schema(
       default: [],
     },
 
+    // Tags help with search (e.g. "running", "leather", "casual")
+    tags: {
+      type: [String],
+      default: [],
+    },
+
     bestseller: {
       type: Boolean,
       default: false,

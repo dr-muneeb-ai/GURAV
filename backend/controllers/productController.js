@@ -77,6 +77,31 @@ const uploadToCloudinary = (fileBuffer) => {
   });
 };
 
+// ================= Helper: Parse Tags =================
+// Accepts either a JSON stringified array (e.g. '["red","summer"]')
+// or a plain comma separated string (e.g. "red, summer") and always
+// returns a clean array of lowercase, trimmed, de-duplicated tags.
+
+const parseTags = (rawTags) => {
+  if (!rawTags) return [];
+
+  let tagsArray = [];
+
+  try {
+    const parsed = JSON.parse(rawTags);
+    tagsArray = Array.isArray(parsed) ? parsed : [String(parsed)];
+  } catch (err) {
+    // Not JSON, fall back to comma separated string
+    tagsArray = String(rawTags).split(",");
+  }
+
+  const cleaned = tagsArray
+    .map((tag) => String(tag).trim().toLowerCase())
+    .filter(Boolean);
+
+  return [...new Set(cleaned)];
+};
+
 // ================= Add Product =================
 
 const addProduct = async (req, res) => {
@@ -88,6 +113,7 @@ const addProduct = async (req, res) => {
       category,
       subCategory,
       sizes,
+      tags,
       bestseller,
     } = req.body;
 
@@ -109,6 +135,7 @@ const addProduct = async (req, res) => {
       category,
       subCategory,
       sizes: sizes ? JSON.parse(sizes) : [],
+      tags: parseTags(tags),
       bestseller: bestseller === "true",
       image: images,
     });
@@ -239,6 +266,10 @@ const updateProduct = async (req, res) => {
 
     if (req.body.sizes) {
       product.sizes = JSON.parse(req.body.sizes);
+    }
+
+    if (req.body.tags !== undefined) {
+      product.tags = parseTags(req.body.tags);
     }
 
     if (req.body.bestseller !== undefined) {

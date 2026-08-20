@@ -4,6 +4,53 @@ import axios from "axios";
 import { backendUrl } from "../App";
 import { toast } from "react-toastify";
 
+// Nike Men's US -> EU shoe size chart
+const MEN_SHOE_SIZES = [
+  { us: 6, eu: 38.5 },
+  { us: 6.5, eu: 39 },
+  { us: 7, eu: 40 },
+  { us: 7.5, eu: 40.5 },
+  { us: 8, eu: 41 },
+  { us: 8.5, eu: 42 },
+  { us: 9, eu: 42.5 },
+  { us: 9.5, eu: 43 },
+  { us: 10, eu: 44 },
+  { us: 10.5, eu: 44.5 },
+  { us: 11, eu: 45 },
+  { us: 11.5, eu: 45.5 },
+  { us: 12, eu: 46 },
+  { us: 12.5, eu: 47 },
+  { us: 13, eu: 47.5 },
+];
+
+// Nike Women's US -> EU shoe size chart
+const WOMEN_SHOE_SIZES = [
+  { us: 5, eu: 35.5 },
+  { us: 5.5, eu: 36 },
+  { us: 6, eu: 36.5 },
+  { us: 6.5, eu: 37.5 },
+  { us: 7, eu: 38 },
+  { us: 7.5, eu: 38.5 },
+  { us: 8, eu: 39 },
+  { us: 8.5, eu: 40 },
+  { us: 9, eu: 40.5 },
+  { us: 9.5, eu: 41 },
+  { us: 10, eu: 42 },
+  { us: 10.5, eu: 42.5 },
+  { us: 11, eu: 43 },
+  { us: 11.5, eu: 44 },
+  { us: 12, eu: 44.5 },
+];
+
+const STANDARD_SIZES = ["S", "M", "L", "XL", "Standard"];
+
+// Figures out which gender chart a saved size label like "Women US 8 / EU 39"
+// belongs to, so editing an existing shoe product pre-selects the right tab.
+const detectShoeGender = (savedSizes = []) => {
+  const hit = savedSizes.find((s) => /^women /i.test(s));
+  return hit ? "Women" : "Men";
+};
+
 const Edit = ({ token }) => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -16,6 +63,8 @@ const Edit = ({ token }) => {
   const [subCategory, setSubCategory] = useState("Premium");
   const [price, setPrice] = useState("");
   const [sizes, setSizes] = useState([]);
+  const [shoeGender, setShoeGender] = useState("Men");
+  const [tags, setTags] = useState("");
   const [bestseller, setBestseller] = useState(false);
 
   const [oldImages, setOldImages] = useState([]);
@@ -69,6 +118,8 @@ const Edit = ({ token }) => {
         setSubCategory(p.subCategory || "Premium");
         setPrice(p.price || "");
         setSizes(p.sizes || []);
+        setShoeGender(detectShoeGender(p.sizes || []));
+        setTags((p.tags || []).join(", "));
         setBestseller(Boolean(p.bestseller));
         setOldImages(p.image || []);
       } else {
@@ -105,6 +156,14 @@ const Edit = ({ token }) => {
       formData.append("subCategory", subCategory);
       formData.append("price", price);
       formData.append("sizes", JSON.stringify(sizes));
+
+      // Tags: comma separated text -> clean JSON array, used for search
+      const tagsArray = tags
+        .split(",")
+        .map((t) => t.trim())
+        .filter(Boolean);
+      formData.append("tags", JSON.stringify(tagsArray));
+
       formData.append(
         "bestseller",
         bestseller ? "true" : "false"
@@ -372,11 +431,66 @@ const Edit = ({ token }) => {
           Sizes
         </p>
 
-        <div className="flex gap-3 flex-wrap">
-          {["S", "M", "L", "XL", "Standard"].map(
-            (size) => {
-              const selected =
-                sizes.includes(size);
+        {category === "Sneakers" ? (
+          <>
+            {/* Men / Women toggle for shoe size chart */}
+            <div className="flex gap-3 mb-3">
+              {["Men", "Women"].map((g) => (
+                <button
+                  key={g}
+                  type="button"
+                  onClick={() => setShoeGender(g)}
+                  className={`px-3 py-1.5 text-sm rounded border transition ${
+                    shoeGender === g
+                      ? "bg-gray-900 text-white border-gray-900"
+                      : "bg-white text-gray-600 border-gray-300 hover:text-gray-900"
+                  }`}
+                >
+                  {g}
+                </button>
+              ))}
+            </div>
+
+            <div className="flex gap-3 flex-wrap">
+              {(shoeGender === "Men"
+                ? MEN_SHOE_SIZES
+                : WOMEN_SHOE_SIZES
+              ).map(({ us, eu }) => {
+                const sizeLabel = `${shoeGender} US ${us} / EU ${eu}`;
+                const selected = sizes.includes(sizeLabel);
+
+                return (
+                  <button
+                    type="button"
+                    key={sizeLabel}
+                    onClick={() => {
+                      setSizes((prev) =>
+                        prev.includes(sizeLabel)
+                          ? prev.filter(
+                              (item) => item !== sizeLabel
+                            )
+                          : [...prev, sizeLabel]
+                      );
+                    }}
+                    className={`px-3 py-2 rounded border text-sm flex flex-col items-center leading-tight ${
+                      selected
+                        ? "bg-blue-600 text-white border-blue-600"
+                        : "bg-white text-black"
+                    }`}
+                  >
+                    <span>US {us}</span>
+                    <span className="text-[10px] opacity-75">
+                      EU {eu}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </>
+        ) : (
+          <div className="flex gap-3 flex-wrap">
+            {STANDARD_SIZES.map((size) => {
+              const selected = sizes.includes(size);
 
               return (
                 <button
@@ -401,9 +515,46 @@ const Edit = ({ token }) => {
                   {size}
                 </button>
               );
-            }
-          )}
-        </div>
+            })}
+          </div>
+        )}
+      </div>
+
+      {/* ========================================
+          TAGS
+      ======================================== */}
+      <div>
+        <p className="mb-2 font-semibold">
+          Tags{" "}
+          <span className="text-xs font-normal text-gray-500">
+            (comma separated — used for easy search)
+          </span>
+        </p>
+
+        <input
+          type="text"
+          placeholder="e.g. running, black, waterproof"
+          className="border rounded p-3 w-full"
+          value={tags}
+          onChange={(e) => setTags(e.target.value)}
+        />
+
+        {tags.trim() && (
+          <div className="flex flex-wrap gap-2 mt-2">
+            {tags
+              .split(",")
+              .map((t) => t.trim())
+              .filter(Boolean)
+              .map((t, i) => (
+                <span
+                  key={i}
+                  className="px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-700"
+                >
+                  {t}
+                </span>
+              ))}
+          </div>
+        )}
       </div>
 
       {/* ========================================
