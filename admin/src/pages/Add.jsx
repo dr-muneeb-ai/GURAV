@@ -42,6 +42,8 @@ const WOMEN_SHOE_SIZES = [
 ];
 
 const STANDARD_SIZES = ["S", "M", "L", "XL", "Standard"];
+const HOODIE_SIZES = ["S", "M", "L", "XL", "2XL"];
+const WALLET_SIZES = ["1 Size"];
 
 const SHOE_SUBCATEGORIES = [
   "NIKE TN",
@@ -238,6 +240,7 @@ const Add = ({ token }) => {
             <option>Watches</option>
             <option>Shoes</option>
             <option>Hoodies</option>
+            <option>Wallet</option>
             <option>Accessories</option>
           </select>
         </div>
@@ -288,8 +291,8 @@ const Add = ({ token }) => {
 		    onClick={() => setShoeGender(g)}
 		    className={`px-3 py-1.5 text-sm rounded-md border transition ${
 		      shoeGender === g
-			? "bg-gray-900 text-white border-gray-900"
-			: "bg-transparent text-gray-300 border-gray-500 hover:text-white"
+			? "bg-blue-600 text-white border-blue-600"
+			: "border-gray-500"
 		    }`}
 		  >
 		    {g}
@@ -315,10 +318,10 @@ const Add = ({ token }) => {
 			    : [...prev, sizeLabel]
 			)
 		      }
-		      className={`px-3 py-2 rounded-md text-sm transition flex flex-col items-center leading-tight ${
+		      className={`px-3 py-2 rounded-md text-sm transition flex flex-col items-center leading-tight border ${
 			sizes.includes(sizeLabel)
-			  ? "bg-blue-600 text-white"
-			  : "bg-transparent text-gray-300 hover:text-white border border-gray-500"
+			  ? "bg-blue-600 text-white border-blue-600"
+			  : "border-gray-500"
 		      }`}
 		    >
 		      <span>US {us}</span>
@@ -332,7 +335,12 @@ const Add = ({ token }) => {
 	    </>
 	  ) : (
 	    <div className="flex flex-wrap gap-3">
-	      {STANDARD_SIZES.map((size) => (
+	      {(category === "Hoodies"
+		? HOODIE_SIZES
+		: category === "Wallet"
+		? WALLET_SIZES
+		: STANDARD_SIZES
+	      ).map((size) => (
 		<button
 		  key={size}
 		  type="button"
@@ -343,10 +351,10 @@ const Add = ({ token }) => {
 			: [...prev, size]
 		    )
 		  }
-		  className={`px-4 py-2 rounded-md transition ${
+		  className={`px-4 py-2 rounded-md transition border ${
 		    sizes.includes(size)
-		      ? "bg-blue-600 text-white"
-		      : "bg-transparent text-gray-300 hover:text-white border border-gray-500"
+		      ? "bg-blue-600 text-white border-blue-600"
+		      : "border-gray-500"
 		  }`}
 		>
 		  {size}

@@ -43,6 +43,8 @@ const WOMEN_SHOE_SIZES = [
 ];
 
 const STANDARD_SIZES = ["S", "M", "L", "XL", "Standard"];
+const HOODIE_SIZES = ["S", "M", "L", "XL", "2XL"];
+const WALLET_SIZES = ["1 Size"];
 
 const SHOE_SUBCATEGORIES = [
   "NIKE TN",
@@ -409,6 +411,10 @@ const Edit = ({ token }) => {
             Hoodies
           </option>
 
+          <option value="Wallet">
+            Wallet
+          </option>
+
           <option value="Accessories">
             Accessories
           </option>
@@ -463,8 +469,8 @@ const Edit = ({ token }) => {
                   onClick={() => setShoeGender(g)}
                   className={`px-3 py-1.5 text-sm rounded border transition ${
                     shoeGender === g
-                      ? "bg-gray-900 text-white border-gray-900"
-                      : "bg-white text-gray-600 border-gray-300 hover:text-gray-900"
+                      ? "bg-blue-600 text-white border-blue-600"
+                      : "border-gray-500"
                   }`}
                 >
                   {g}
@@ -496,7 +502,7 @@ const Edit = ({ token }) => {
                     className={`px-3 py-2 rounded border text-sm flex flex-col items-center leading-tight ${
                       selected
                         ? "bg-blue-600 text-white border-blue-600"
-                        : "bg-white text-black"
+                        : "border-gray-500"
                     }`}
                   >
                     <span>US {us}</span>
@@ -510,7 +516,12 @@ const Edit = ({ token }) => {
           </>
         ) : (
           <div className="flex gap-3 flex-wrap">
-            {STANDARD_SIZES.map((size) => {
+            {(category === "Hoodies"
+              ? HOODIE_SIZES
+              : category === "Wallet"
+              ? WALLET_SIZES
+              : STANDARD_SIZES
+            ).map((size) => {
               const selected = sizes.includes(size);
 
               return (
@@ -530,7 +541,7 @@ const Edit = ({ token }) => {
                   className={`px-4 py-2 rounded border ${
                     selected
                       ? "bg-blue-600 text-white border-blue-600"
-                      : "bg-white text-black"
+                      : "border-gray-500"
                   }`}
                 >
                   {size}
