@@ -645,7 +645,7 @@ function App() {
 		/>
 
                 <Route
-                  path="/instagram Videos"
+                  path="/instagram"
                   element={<InstagramVideos token={token} />}
                 />
 

@@ -12,7 +12,7 @@ const Sidebar = ({ isOpen, onClose }) => {
     { to: "/list", label: "Products", icon: "📦" },
     { to: "/orders", label: "Orders", icon: "🛒" },
     { to: "/chat", label: "Customer Support", icon: "💬" },
-    { to: "/instagram", label: "Instagram Videos", icon: "📹" },
+    { to: "/instagram", label: "Instagram Videos", icon: "🎦" },
     { to: "/stats", label: "Stats", icon: "📊" },
     { to: "/settings", label: "Settings", icon: "⚙️" },
   ];
