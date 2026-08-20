@@ -1,20 +1,30 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState, useContext } from "react";
+import axios from "axios";
+import { ShopContext } from "../context/ShopContext";
 
-// 👉 Replace these paths with your actual video files from your assets folder
-const videos = [
-  "/video1.mp4",
-  "/video2.mp4",
-  "/video3.mp4",
-  "/video4.mp4",
-  "/video5.mp4",
-  "/video6.mp4",
-];
-
-// 👉 Yahan se speed control karo (0.5 = half speed / slow, 1 = normal speed, 0.25 = bohot slow)
+// Yahan se speed control karo (0.5 = half speed / slow, 1 = normal speed, 0.25 = bohot slow)
 const VIDEO_SPEED = 0.8;
 
 const InstagramSection = () => {
+  const { backendUrl } = useContext(ShopContext);
   const videoRefs = useRef([]);
+  const [videos, setVideos] = useState([]);
+
+  useEffect(() => {
+    const fetchVideos = async () => {
+      try {
+        const { data } = await axios.get(`${backendUrl}/api/video/list`);
+
+        if (data.success) {
+          setVideos(data.videos);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    if (backendUrl) fetchVideos();
+  }, [backendUrl]);
 
   useEffect(() => {
     videoRefs.current.forEach((video) => {
@@ -22,7 +32,7 @@ const InstagramSection = () => {
         video.playbackRate = VIDEO_SPEED;
       }
     });
-  }, []);
+  }, [videos]);
 
   return (
     <section className="relative py-16 sm:py-24 md:py-32 overflow-hidden">
@@ -115,98 +125,100 @@ const InstagramSection = () => {
           </div>
 
           {/* RIGHT VIDEO GRID */}
-          <div className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-2">
+          {videos.length > 0 && (
+            <div className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-2">
 
-            {videos.map((videoSrc, index) => (
-              <a
-                key={index}
-                href="https://www.instagram.com/dripdistrictaus"
-                target="_blank"
-                rel="noreferrer"
-                className="
-                  group
-                  relative
-                  overflow-hidden
-                  rounded-lg
-                  sm:rounded-xl
-                  md:rounded-2xl
-                  bg-white/5
-                  border
-                  border-white/10
-                  aspect-[4/5]
-                  shadow-[0_15px_40px_rgba(0,0,0,0.4)]
-                "
-              >
-
-                <video
-                  ref={(el) => (videoRefs.current[index] = el)}
-                  src={videoSrc}
+              {videos.map((video, index) => (
+                <a
+                  key={video._id}
+                  href="https://www.instagram.com/dripdistrictaus"
+                  target="_blank"
+                  rel="noreferrer"
                   className="
-                    h-full
-                    w-full
-                    object-cover
-                    transition-transform
-                    duration-500
-                    ease-out
-                    group-hover:scale-110
-                  "
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  onLoadedMetadata={(e) => {
-                    e.currentTarget.playbackRate = VIDEO_SPEED;
-                  }}
-                />
-
-                {/* Overlay */}
-                <div
-                  className="
-                    absolute
-                    inset-0
-                    bg-black/0
-                    group-hover:bg-black/20
-                    transition-all
-                    duration-500
-                  "
-                />
-
-                {/* Instagram icon */}
-                <div
-                  className="
-                    absolute
-                    inset-0
-                    flex
-                    items-center
-                    justify-center
-                    opacity-0
-                    group-hover:opacity-100
-                    transition-all
-                    duration-500
+                    group
+                    relative
+                    overflow-hidden
+                    rounded-lg
+                    sm:rounded-xl
+                    md:rounded-2xl
+                    bg-white/5
+                    border
+                    border-white/10
+                    aspect-[4/5]
+                    shadow-[0_15px_40px_rgba(0,0,0,0.4)]
                   "
                 >
-                  <div className="
-                    h-9
-                    w-9
-                    sm:h-11
-                    sm:w-11
-                    rounded-full
-                    bg-white/90
-                    backdrop-blur-sm
-                    flex
-                    items-center
-                    justify-center
-                    text-black
-                    shadow-xl
-                  ">
-                    ↗
+
+                  <video
+                    ref={(el) => (videoRefs.current[index] = el)}
+                    src={video.videoUrl}
+                    className="
+                      h-full
+                      w-full
+                      object-cover
+                      transition-transform
+                      duration-500
+                      ease-out
+                      group-hover:scale-110
+                    "
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    onLoadedMetadata={(e) => {
+                      e.currentTarget.playbackRate = VIDEO_SPEED;
+                    }}
+                  />
+
+                  {/* Overlay */}
+                  <div
+                    className="
+                      absolute
+                      inset-0
+                      bg-black/0
+                      group-hover:bg-black/20
+                      transition-all
+                      duration-500
+                    "
+                  />
+
+                  {/* Instagram icon */}
+                  <div
+                    className="
+                      absolute
+                      inset-0
+                      flex
+                      items-center
+                      justify-center
+                      opacity-0
+                      group-hover:opacity-100
+                      transition-all
+                      duration-500
+                    "
+                  >
+                    <div className="
+                      h-9
+                      w-9
+                      sm:h-11
+                      sm:w-11
+                      rounded-full
+                      bg-white/90
+                      backdrop-blur-sm
+                      flex
+                      items-center
+                      justify-center
+                      text-black
+                      shadow-xl
+                    ">
+                      ↗
+                    </div>
                   </div>
-                </div>
 
-              </a>
-            ))}
+                </a>
+              ))}
 
-          </div>
+            </div>
+          )}
 
         </div>
 

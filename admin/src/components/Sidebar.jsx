@@ -12,6 +12,7 @@ const Sidebar = ({ isOpen, onClose }) => {
     { to: "/list", label: "Products", icon: "📦" },
     { to: "/orders", label: "Orders", icon: "🛒" },
     { to: "/chat", label: "Customer Support", icon: "💬" },
+    { to: "/instagram", label: "Instagram Videos", icon: "📹" },
     { to: "/stats", label: "Stats", icon: "📊" },
     { to: "/settings", label: "Settings", icon: "⚙️" },
   ];
@@ -66,7 +67,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                 className="text-xl text-white tracking-wide"
                 style={{ fontFamily: "Prata, serif" }}
               >
-                Gurav
+                Death of Justice
               </h2>
 
               <p

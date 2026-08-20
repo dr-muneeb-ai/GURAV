@@ -1,5 +1,6 @@
 import chatRoute from "./routes/chatRoute.js";
 import cartRouter from "./routes/cartRoute.js";
+import videoRouter from "./routes/videoRoute.js";
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
@@ -31,6 +32,7 @@ app.use("/api/visitor", visitorRouter);
 app.use("/api/review", reviewRouter);
 app.use("/api/chat", chatRoute);
 app.use("/api/cart", cartRouter);
+app.use("/api/video", videoRouter);
 // Test Route
 app.get("/", (req, res) => {
   res.json({

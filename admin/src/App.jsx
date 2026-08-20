@@ -15,6 +15,7 @@ import List from "./pages/List";
 import Edit from "./pages/Edit";
 import Stats from "./pages/Stats";
 import Chat from "./pages/Chat";
+import InstagramVideos from "./pages/InstagramVideos";
 export const backendUrl = "https://gurav-1.onrender.com";
 export const currency = "A$.";
 
@@ -642,6 +643,11 @@ function App() {
 		  path="/chat"
 		  element={<Chat token={token} />}
 		/>
+
+                <Route
+                  path="/instagram Videos"
+                  element={<InstagramVideos token={token} />}
+                />
 
                 <Route
                   path="/stats"
