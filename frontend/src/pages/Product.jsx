@@ -26,6 +26,43 @@ const initials = (name = "") =>
     .join("")
     .toUpperCase();
 
+// Nike Men's / Women's Shoe Size Chart (US -> EU)
+const MENS_SIZE_CHART = [
+  { us: "6", eu: "38.5" },
+  { us: "6.5", eu: "39" },
+  { us: "7", eu: "40" },
+  { us: "7.5", eu: "40.5" },
+  { us: "8", eu: "41" },
+  { us: "8.5", eu: "42" },
+  { us: "9", eu: "42.5" },
+  { us: "9.5", eu: "43" },
+  { us: "10", eu: "44" },
+  { us: "10.5", eu: "44.5" },
+  { us: "11", eu: "45" },
+  { us: "11.5", eu: "45.5" },
+  { us: "12", eu: "46" },
+  { us: "12.5", eu: "47" },
+  { us: "13", eu: "47.5" },
+];
+
+const WOMENS_SIZE_CHART = [
+  { us: "5", eu: "35.5" },
+  { us: "5.5", eu: "36" },
+  { us: "6", eu: "36.5" },
+  { us: "6.5", eu: "37.5" },
+  { us: "7", eu: "38" },
+  { us: "7.5", eu: "38.5" },
+  { us: "8", eu: "39" },
+  { us: "8.5", eu: "40" },
+  { us: "9", eu: "40.5" },
+  { us: "9.5", eu: "41" },
+  { us: "10", eu: "42" },
+  { us: "10.5", eu: "42.5" },
+  { us: "11", eu: "43" },
+  { us: "11.5", eu: "44" },
+  { us: "12", eu: "44.5" },
+];
+
 const Product = () => {
   const { productId } = useParams();
 
@@ -48,6 +85,7 @@ const Product = () => {
   const [size, setSize] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [showReviews, setShowReviews] = useState(false);
+  const [showSizeGuide, setShowSizeGuide] = useState(false);
   const [reviews, setReviews] = useState([]);
   const [reviewRating, setReviewRating] = useState(5);
   const [reviewComment, setReviewComment] = useState("");
@@ -56,9 +94,11 @@ const Product = () => {
   const [ratingAverage, setRatingAverage] = useState(0);
   const [reviewsCount, setReviewsCount] = useState(0);
 
-  // Swipe tracking for the main image gallery
+  // Swipe/drag tracking for the main image gallery
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
+  const isDraggingImage = useRef(false);
+  const dragStartX = useRef(0);
 
   // Sets the main image whenever the product data becomes available/changes
   useEffect(() => {
@@ -230,6 +270,35 @@ const handleBuyNow = async () => {
     touchEndX.current = 0;
   };
 
+  // Mouse drag support (desktop) - mirrors the touch swipe behavior above
+  const handleImageMouseDown = (e) => {
+    isDraggingImage.current = true;
+    dragStartX.current = e.clientX;
+  };
+
+  const handleImageMouseMove = (e) => {
+    if (!isDraggingImage.current) return;
+    e.preventDefault();
+  };
+
+  const handleImageMouseUp = (e) => {
+    if (!isDraggingImage.current) return;
+    isDraggingImage.current = false;
+
+    const distance = dragStartX.current - e.clientX;
+    const dragThreshold = 50;
+
+    if (distance > dragThreshold) {
+      goToNextImage();
+    } else if (distance < -dragThreshold) {
+      goToPrevImage();
+    }
+  };
+
+  const handleImageMouseLeave = () => {
+    isDraggingImage.current = false;
+  };
+
   if (!productData)
     return <div className="opacity-0"></div>;
 
@@ -275,6 +344,10 @@ const handleBuyNow = async () => {
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
+              onMouseDown={handleImageMouseDown}
+              onMouseMove={handleImageMouseMove}
+              onMouseUp={handleImageMouseUp}
+              onMouseLeave={handleImageMouseLeave}
               className="
                 relative
                 aspect-square
@@ -289,6 +362,8 @@ const handleBuyNow = async () => {
                 transition-shadow
                 duration-500
                 select-none
+                cursor-grab
+                active:cursor-grabbing
               "
             >
               <img
@@ -531,48 +606,54 @@ const handleBuyNow = async () => {
 
               {/* SIZE */}
               <div className="mt-5 sm:mt-6">
-                <p className="
-                  font-medium
-                  mb-2
-                  sm:mb-3
-                  text-sm
-                  sm:text-base
-                ">
-                  Select Size
-                </p>
+                <div className="flex items-center justify-between mb-2 sm:mb-3">
+                  <p className="font-medium text-sm sm:text-base">
+                    Select Size
+                  </p>
 
-                <div className="
-                  flex
-                  flex-wrap
-                  gap-2
-                  sm:gap-3
-                ">
-                  {productData.sizes.map((item, index) => (
+                  {productData.category === "Sneakers" && (
                     <button
-                      key={index}
-                      onClick={() => setSize(item)}
-                      className={`
-                        px-4
-                        sm:px-5
-                        py-1.5
-                        sm:py-2
-                        text-sm
-                        sm:text-base
-                        rounded-xl
-                        border
-                        transition-colors
-                        duration-300
-                        ${
-                          item === size
-                            ? "bg-[#b9572c] text-white border-[#b9572c]"
-                            : "bg-white hover:border-[#b9572c] hover:text-[#b9572c]"
-                        }
-                      `}
+                      type="button"
+                      onClick={() => setShowSizeGuide(true)}
+                      className="text-xs sm:text-sm text-[#b9572c] underline underline-offset-2 hover:text-[#9a4522] transition"
                     >
-                      {item}
+                      Size Guide
                     </button>
-                  ))}
+                  )}
                 </div>
+
+                <select
+                  value={size}
+                  onChange={(e) => setSize(e.target.value)}
+                  className="
+                    w-full
+                    sm:w-72
+                    border
+                    border-gray-300
+                    rounded-xl
+                    px-4
+                    py-3
+                    text-sm
+                    sm:text-base
+                    bg-white
+                    text-gray-800
+                    outline-none
+                    focus:border-[#b9572c]
+                    transition-colors
+                    duration-300
+                    cursor-pointer
+                  "
+                >
+                  <option value="" disabled>
+                    Select a size
+                  </option>
+
+                  {productData.sizes.map((item, index) => (
+                    <option key={index} value={item}>
+                      {item}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               {/* QUANTITY */}
@@ -1004,6 +1085,133 @@ to-gray-100
                   </div>
                 )}
               </div>
+            </div>
+          </div>
+        )}
+
+        {/* SIZE GUIDE MODAL */}
+        {showSizeGuide && (
+          <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
+            <div
+              onClick={() => setShowSizeGuide(false)}
+              className="absolute inset-0 bg-black/40"
+            ></div>
+
+            <div className="
+              relative
+              bg-white
+              w-full
+              sm:w-[560px]
+              sm:rounded-3xl
+              rounded-t-3xl
+              shadow-2xl
+              max-h-[85vh]
+              overflow-y-auto
+              p-5
+              sm:p-8
+            ">
+
+              <div className="flex justify-between items-center mb-5 sm:mb-6">
+                <h2
+                  className="text-xl sm:text-2xl"
+                  style={{ fontFamily: "'Prata', serif" }}
+                >
+                  Size Guide
+                </h2>
+
+                <button
+                  onClick={() => setShowSizeGuide(false)}
+                  className="text-xl sm:text-2xl text-gray-500 hover:text-black transition"
+                  aria-label="Close size guide"
+                  type="button"
+                >
+                  ✕
+                </button>
+              </div>
+
+              <p className="text-gray-500 text-xs sm:text-sm mb-6">
+                US to EU size conversion. Not sure of your size? We
+                recommend sizing down half a size if you're between sizes.
+              </p>
+
+              <div className="grid sm:grid-cols-2 gap-6 sm:gap-8">
+
+                {/* MEN'S CHART */}
+                <div>
+                  <h3 className="font-semibold text-sm sm:text-base mb-3 text-[#1d1d1b]">
+                    Men's
+                  </h3>
+
+                  <div className="rounded-2xl border border-gray-200 overflow-hidden">
+                    <table className="w-full text-xs sm:text-sm">
+                      <thead>
+                        <tr className="bg-gray-50 text-gray-500">
+                          <th className="text-left font-medium py-2 px-3 sm:px-4">
+                            US
+                          </th>
+                          <th className="text-left font-medium py-2 px-3 sm:px-4">
+                            EU
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {MENS_SIZE_CHART.map((row) => (
+                          <tr
+                            key={row.us}
+                            className="border-t border-gray-100"
+                          >
+                            <td className="py-2 px-3 sm:px-4 text-gray-700">
+                              {row.us}
+                            </td>
+                            <td className="py-2 px-3 sm:px-4 text-gray-700">
+                              {row.eu}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                {/* WOMEN'S CHART */}
+                <div>
+                  <h3 className="font-semibold text-sm sm:text-base mb-3 text-[#1d1d1b]">
+                    Women's
+                  </h3>
+
+                  <div className="rounded-2xl border border-gray-200 overflow-hidden">
+                    <table className="w-full text-xs sm:text-sm">
+                      <thead>
+                        <tr className="bg-gray-50 text-gray-500">
+                          <th className="text-left font-medium py-2 px-3 sm:px-4">
+                            US
+                          </th>
+                          <th className="text-left font-medium py-2 px-3 sm:px-4">
+                            EU
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {WOMENS_SIZE_CHART.map((row) => (
+                          <tr
+                            key={row.us}
+                            className="border-t border-gray-100"
+                          >
+                            <td className="py-2 px-3 sm:px-4 text-gray-700">
+                              {row.us}
+                            </td>
+                            <td className="py-2 px-3 sm:px-4 text-gray-700">
+                              {row.eu}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+              </div>
+
             </div>
           </div>
         )}
