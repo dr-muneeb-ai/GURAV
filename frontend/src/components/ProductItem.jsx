@@ -21,13 +21,13 @@ const ProductItem = ({
     <Link to={`/product/${id}`} className="group w-full block">
       <div className="bg-white rounded-2xl overflow-hidden border border-[#eadfce] shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-500">
         {/* IMAGE */}
-        <div className="relative w-full aspect-square bg-[#f5f2ec] overflow-hidden p-4 sm:p-6">
+        <div className="relative w-full aspect-square bg-white overflow-hidden">
           {imageUrl && !imgError ? (
             <img
               src={imageUrl}
               alt={name}
               onError={() => setImgError(true)}
-              className="w-full h-full object-contain group-hover:scale-105 duration-500"
+              className="w-full h-full object-cover scale-110 group-hover:scale-125 duration-500"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center text-gray-300 text-xs">
