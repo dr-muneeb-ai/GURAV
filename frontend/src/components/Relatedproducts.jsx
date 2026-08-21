@@ -2,12 +2,10 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import { ShopContext } from '../context/ShopContext';
 import ProductItem from './ProductItem';
 import Title from './Title';
-
 const RelatedProducts = ({ category, subCategory }) => {
   const { products } = useContext(ShopContext);
   const [related, setRelated] = useState([]);
   const scrollRef = useRef(null);
-
   useEffect(() => {
     if (products.length > 0) {
       let filteredProducts = products.filter(
@@ -16,21 +14,16 @@ const RelatedProducts = ({ category, subCategory }) => {
       setRelated(filteredProducts); // Show every related product, not just the first 5
     }
   }, [products, category, subCategory]);
-
   const scrollByAmount = (amount) => {
     scrollRef.current?.scrollBy({ left: amount, behavior: 'smooth' });
   };
-
   if (related.length === 0) return null;
-
   return (
-    <div className='my-16 sm:my-24'>
+    <div className='mt-6 sm:mt-8 mb-16 sm:mb-24'>
       <div className='text-center text-3xl py-2'>
         <Title text1={'RELATED'} text2={'PRODUCTS'} />
       </div>
-
       <div className='relative mt-4 sm:mt-6'>
-
         {/* LEFT ARROW - desktop only */}
         <button
           onClick={() => scrollByAmount(-320)}
@@ -40,7 +33,6 @@ const RelatedProducts = ({ category, subCategory }) => {
         >
           ‹
         </button>
-
         {/* HORIZONTAL SLIDER - drag/swipe on mobile, arrows on desktop */}
         <div
           ref={scrollRef}
@@ -73,7 +65,6 @@ const RelatedProducts = ({ category, subCategory }) => {
             </div>
           ))}
         </div>
-
         {/* RIGHT ARROW - desktop only */}
         <button
           onClick={() => scrollByAmount(320)}
@@ -83,10 +74,8 @@ const RelatedProducts = ({ category, subCategory }) => {
         >
           ›
         </button>
-
       </div>
     </div>
   );
 };
-
 export default RelatedProducts;
