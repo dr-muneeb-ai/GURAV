@@ -68,7 +68,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                 className="text-xl text-white tracking-wide"
                 style={{ fontFamily: "Prata, serif" }}
               >
-                Gurav
+                Death of Justice
               </h2>
 
               <p
