@@ -2,6 +2,21 @@ import React, { useContext, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
 import { Link } from "react-router-dom";
 import { FaEye, FaShoppingBag, FaStar } from "react-icons/fa";
+
+// Cloudinary can auto-trim whatever whitespace/padding a source photo has,
+// then pad it back out to a perfect square on a white background. This
+// makes every product image look consistently "filled" no matter what
+// size/composition the admin originally uploaded - a real fix instead of
+// a CSS zoom guess.
+const getAutoFitImage = (url) => {
+  if (!url || !url.includes("/upload/")) return url;
+
+  return url.replace(
+    "/upload/",
+    "/upload/e_trim,c_pad,b_white,ar_1:1,w_800,h_800,q_auto,f_auto/"
+  );
+};
+
 const ProductItem = ({
   id,
   image,
@@ -15,7 +30,7 @@ const ProductItem = ({
   const [imgError, setImgError] = useState(false);
   const imageUrl =
     image && Array.isArray(image) && image.length > 0
-      ? image[0]
+      ? getAutoFitImage(image[0])
       : "";
   return (
     <Link to={`/product/${id}`} className="group w-full block">
@@ -27,7 +42,7 @@ const ProductItem = ({
               src={imageUrl}
               alt={name}
               onError={() => setImgError(true)}
-              className="w-full h-full object-cover scale-110 group-hover:scale-125 duration-500"
+              className="w-full h-full object-cover group-hover:scale-105 duration-500"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center text-gray-300 text-xs">
