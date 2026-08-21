@@ -1,6 +1,7 @@
-import React from "react";
-import { assets } from "../assets/assets";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ShopContext } from "../context/ShopContext";
+import axios from "axios";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
@@ -9,12 +10,24 @@ import "swiper/css";
 
 const Hero = () => {
   const navigate = useNavigate();
-  const heroImages = [
-  assets.nitesh_img,
-  assets.hero2,
-  assets.hero3,
-  assets.hero4,
-];
+  const { backendUrl } = useContext(ShopContext);
+  const [heroImages, setHeroImages] = useState([]);
+
+  useEffect(() => {
+    const fetchHeroImages = async () => {
+      try {
+        const { data } = await axios.get(`${backendUrl}/api/hero/list`);
+
+        if (data.success) {
+          setHeroImages(data.images.map((img) => img.imageUrl));
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    if (backendUrl) fetchHeroImages();
+  }, [backendUrl]);
 
   const scrollToProducts = () => {
     const section = document.getElementById("products");
@@ -111,6 +124,7 @@ const Hero = () => {
           </div>
         </div>
 	{/*Right imGE*/}
+	{heroImages.length > 0 && (
 	<div className="w-full lg:w-[54%] flex justify-center lg:justify-end items-center px-5 pb-10 pt-2 sm:p-6">
 	  <div className="hero-image w-full max-w-[650px] h-[340px] sm:h-[500px] lg:h-[600px] overflow-hidden rounded-2xl sm:rounded-3xl border-2 border-transparent shadow-2xl">
 
@@ -145,6 +159,7 @@ group-hover:scale-110
 
 	  </div>
 	</div>
+	)}
 	</div>
     </section>
   );
