@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
 import { assets } from "../assets/assets";
 import Title from "../components/Title";
@@ -6,12 +7,35 @@ import ProductItem from "../components/ProductItem";
 
 const Collection = () => {
   const { products, search, showSearch } = useContext(ShopContext);
+  const location = useLocation();
 
   const [showFilter, setShowFilter] = useState(false);
   const [filterProducts, setFilterProduct] = useState([]);
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
   const [sortType, setSortType] = useState("relevant");
+
+  // Reads ?category=X or ?subCategory=Y from the URL (e.g. when arriving
+  // from the Navbar "Shop" dropdown) and pre-applies that filter. Runs
+  // whenever the URL search string changes, so clicking a different
+  // category link while already on this page also updates the filter.
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const urlCategory = params.get("category");
+    const urlSubCategory = params.get("subCategory");
+
+    if (urlCategory) {
+      setCategory([urlCategory]);
+    } else {
+      setCategory([]);
+    }
+
+    if (urlSubCategory) {
+      setSubCategory([urlSubCategory]);
+    } else {
+      setSubCategory([]);
+    }
+  }, [location.search]);
 
   // =========================
   // DERIVE FILTER OPTIONS
