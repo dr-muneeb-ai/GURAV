@@ -137,29 +137,6 @@ const Sidebar = ({ isOpen, onClose }) => {
 
         </div>
 
-        {/* Bottom Card */}
-
-        <div className="absolute bottom-6 left-4 right-4">
-
-          <div className="rounded-3xl border border-red-500/20 bg-gradient-to-br from-[#111111] to-[#1A1A1A] p-5 shadow-[0_0_25px_rgba(220,20,60,.18)]">
-
-            <h3
-              className="text-lg text-white"
-              style={{ fontFamily: "Prata, serif" }}
-            >
-              Admin Panel
-            </h3>
-
-            <div className="mt-4 h-2 rounded-full bg-gray-800 overflow-hidden">
-
-              <div className="h-full w-3/4 rounded-full bg-gradient-to-r from-[#DC143C] to-[#FF1744] shadow-[0_0_15px_rgba(220,20,60,.6)]"></div>
-
-            </div>
-
-          </div>
-
-        </div>
-
       </aside>
     </>
   );
