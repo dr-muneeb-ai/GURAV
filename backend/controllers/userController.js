@@ -22,7 +22,19 @@ const createToken = (id) => {
 const uploadToCloudinary = (fileBuffer) => {
   return new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
-      { folder: "gurav-users", resource_type: "image" },
+      {
+        folder: "gurav-users",
+        resource_type: "image",
+        // Force-convert to jpg. Phone cameras (iPhones especially) often
+        // upload in HEIC format, which doesn't render in an <img> tag on
+        // most mobile browsers — converting on upload guarantees the
+        // stored URL always displays everywhere.
+        format: "jpg",
+        quality: "auto",
+        width: 500,
+        height: 500,
+        crop: "limit",
+      },
       (error, result) => {
         if (error) reject(error);
         else resolve(result.secure_url);

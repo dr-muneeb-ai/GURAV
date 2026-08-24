@@ -8,7 +8,13 @@ const MAX_HERO_IMAGES = 6;
 const uploadToCloudinary = (fileBuffer) => {
   return new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
-      { folder: "gurav-hero" },
+      {
+        folder: "gurav-hero",
+        quality: "auto",
+        fetch_format: "auto",
+        width: 1600,
+        crop: "limit",
+      },
       (error, result) => {
         if (error) reject(error);
         else resolve(result);
